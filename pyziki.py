@@ -1801,10 +1801,10 @@ class CpuBox(Box, SubBox):
 	old_battery_len = 0
 	battery_path: Union[str, None] = ""
 	battery_clear: bool = False
-	battery_symbols: Dict[str, str] = {"Charging": "▲",
-									"Discharging": "▼",
-									"Full": "■",
-									"Not charging": "■"}
+	battery_symbols: Dict[str, str] = {"Charging": "🔊",
+									"Discharging": "🔊",
+									"Full": "🔊",
+									"Not charging": "🔊"}
 	clock_block: bool = True
 	Box.buffers.append(buffer)
 
@@ -1953,8 +1953,9 @@ class CpuBox(Box, SubBox):
 			if (battery_pos != cls.old_battery_pos or battery_len != cls.old_battery_len) and cls.old_battery_pos > 0 and not cls.resized:
 				bat_out += f'{Mv.to(y-1, cls.old_battery_pos)}{THEME.cpu_box(Symbol.h_line*(cls.old_battery_len+4))}'
 			cls.old_battery_pos, cls.old_battery_len = battery_pos, battery_len
-			bat_out += (f'{Mv.to(y-1, battery_pos)}{THEME.cpu_box(Symbol.title_left)}{Fx.b}{THEME.title}BAT{battery_symbol} {cls.battery_percent}%'+
-				("" if cls.width < 100 else f' {Fx.ub}{Meters.battery(cls.battery_percent)}{Fx.b}') +
+			# ziki: add '+' and '-' symbols to beginning and end of VOL section
+			bat_out += (f'{Mv.to(y-1, battery_pos)}{THEME.cpu_box(Symbol.title_left)}{THEME.hi_fg("+")} {Fx.b}{THEME.title}VOL{battery_symbol} {cls.battery_percent}%'+
+				("" if cls.width < 100 else f' {Fx.ub}{Meters.battery(cls.battery_percent)}{Fx.b} {THEME.hi_fg("-")}') +
 				f'{THEME.title}{battery_time}{Fx.ub}{THEME.cpu_box(Symbol.title_right)}')
 			Draw.buffer("battery", f'{bat_out}{Term.fg}', only_save=Menu.active)
 		elif cls.battery_clear:
