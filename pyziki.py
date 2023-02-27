@@ -5473,12 +5473,13 @@ def process_keys():
 		elif key in ["H", "f1"]:
 			Menu.help()
 		elif key == "m":
-			if list(Box.view_modes).index(Box.view_mode) + 1 > len(list(Box.view_modes)) - 1:
-				Box.view_mode = list(Box.view_modes)[0]
-			else:
-				Box.view_mode = list(Box.view_modes)[(list(Box.view_modes).index(Box.view_mode) + 1)]
-			CONFIG.shown_boxes = " ".join(Box.view_modes[Box.view_mode])
-			Draw.clear(saved=True)
+			# ziki: prevent toggle modes via `m` key
+			# if list(Box.view_modes).index(Box.view_mode) + 1 > len(list(Box.view_modes)) - 1:
+			# 	Box.view_mode = list(Box.view_modes)[0]
+			# else:
+			# 	Box.view_mode = list(Box.view_modes)[(list(Box.view_modes).index(Box.view_mode) + 1)]
+			# CONFIG.shown_boxes = " ".join(Box.view_modes[Box.view_mode])
+			# Draw.clear(saved=True)
 			Term.refresh(force=True)
 		elif key in box_keys:
 			boxes = CONFIG.shown_boxes.split()
