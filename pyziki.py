@@ -64,6 +64,9 @@ args.add_argument("-v", "--version",	action="store_true", 			help = "show versio
 args.add_argument("--debug",			action="store_true", 			help = "start with loglevel set to DEBUG overriding value set in config")
 stdargs = args.parse_args()
 
+# ziki: force pyziki to start without net section
+stdargs.boxes = "cpu mem proc"
+
 if stdargs.version:
 	print(f'bpytop version: {VERSION}\n'
 		f'psutil version: {".".join(str(x) for x in psutil.version_info)}')
