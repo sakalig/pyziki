@@ -2450,7 +2450,7 @@ class NetBox(Box, SubBox):
 			# ziki: undo comment out network graph
 			out += f'{Mv.to(y if direction == "download" else y + cls.graph_height["download"], x)}{Graphs.net[direction](None if stats["redraw"] else stats["speed"][-1])}'
 
-			# ziki: comment out download and upload values
+			# ziki: undo comment out download and upload values
 			out += (f'{Mv.to(by+cy, bx)}{THEME.main_fg}{cls.symbols[direction]} {strings["byte_ps"]:<10.10}' +
 					("" if bw < 20 else f'{Mv.to(by+cy, bx+bw - 12)}{"(" + strings["bit_ps"] + ")":>12.12}'))
 			cy += 1 if bh != 3 else 2
