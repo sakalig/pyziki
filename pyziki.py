@@ -470,7 +470,8 @@ class Config:
 	mem_graphs: bool = True
 	show_swap: bool = True
 	swap_disk: bool = True
-	show_disks: bool = True
+	# ziki: toggle show_disks to 'False' but still revealing graphs
+	show_disks: bool = False
 	only_physical: bool = True
 	use_fstab: bool = False
 	show_io_stat: bool = True
@@ -2350,8 +2351,9 @@ class MemBox(Box):
 						if len(mem.disks) * 3 + (len(mem.disks_io_dict) if CONFIG.show_io_stat else 0) <= h + 1:
 							if cy > h - 1: break
 							out += Mv.to(y+cy, x+cx)
-							out += f'Free:{str(item["free_percent"]) + "%":>4} ' if big_disk else f'{"F "}'
-							out += f'{Meters.disks_free[name](None if cls.resized else mem.disks[name]["free_percent"])}{item["free"][:None if big_disk else -2]:>{9 if big_disk else 7}}'
+							# ziki: hide 'Free' storage space on disks: meter and percentage label
+							#out += f'Free:{str(item["free_percent"]) + "%":>4} ' if big_disk else f'{"F "}'
+							#out += f'{Meters.disks_free[name](None if cls.resized else mem.disks[name]["free_percent"])}{item["free"][:None if big_disk else -2]:>{9 if big_disk else 7}}'
 							cy += 1
 							if len(mem.disks) * 4 + (len(mem.disks_io_dict) if CONFIG.show_io_stat else 0) <= h + 1: cy += 1
 		except (KeyError, TypeError):
@@ -2893,7 +2895,7 @@ class ProcBox(Box):
 
 			#* Draw small cpu graph for process if cpu usage was above 1% in the last 10 updates
 			if pid in Graphs.pid_cpu:
-				# ziki: undo add cosmetic 'print()' and comment out individual process graph
+				# ziki: undo add cosmetic 'print()' and hide individual process graph
 				#print()
 				out += f'{Mv.to(y+cy, x + w - (12 if proc.num_procs > cls.select_max else 11))}{c_color if CONFIG.proc_colors else THEME.proc_misc}{Graphs.pid_cpu[pid](None if cls.moved else round(cpu))}{THEME.main_fg}'
 
