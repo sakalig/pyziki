@@ -5415,7 +5415,8 @@ def temperature(value: int, scale: str = "celsius") -> Tuple[int, str]:
 def process_keys():
 	mouse_pos: Tuple[int, int] = (0, 0)
 	filtered: bool = False
-	box_keys = {"1" : "cpu", "2" : "mem", "3" : "net", "4" : "proc"}
+	# ziki: remove net box toggle
+	box_keys = {"1" : "cpu", "2" : "mem", "4" : "proc"}
 	while Key.has_key():
 		key = Key.get()
 		found: bool = True
