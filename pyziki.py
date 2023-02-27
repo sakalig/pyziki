@@ -1771,7 +1771,7 @@ class Box:
 		else:
 			out = "".join(sub._draw_bg() for sub in cls.__subclasses__()) # type: ignore
 		Draw.buffer("bg", out, now=now, z=1000, only_save=Menu.active, once=True)
-		cls.draw_update_ms(now=now)
+		#cls.draw_update_ms(now=now)
 		if CONFIG.draw_clock: cls.draw_clock(force=True)
 
 class SubBox:
