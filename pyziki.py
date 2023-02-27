@@ -2401,7 +2401,7 @@ class NetBox(Box, SubBox):
 	def _draw_bg(cls) -> str:
 		if not "net" in cls.boxes: return ""
 		return f'{create_box(box=cls, line_color=THEME.net_box)}'
-		# ziki: substituted netbox + download/upload sub-box with a single clear box instruction
+		# ziki: undo substituted netbox + download/upload sub-box with a single clear box instruction
 		return f'{create_box(box=cls, line_color=THEME.net_box)}\
 		{create_box(x=cls.box_x, y=cls.box_y, width=cls.box_width, height=cls.box_height, line_color=THEME.div_line, fill=False, title="Download", title2="Upload")}'
 
@@ -2447,8 +2447,8 @@ class NetBox(Box, SubBox):
 			if stats["redraw"] or cls.resized:
 				Graphs.net[direction] = Graph(w - bw - 3, cls.graph_height[direction], THEME.gradient[direction], stats["speed"], max_value=net.sync_top if CONFIG.net_sync else stats["graph_top"],
 					invert=direction != "download", color_max_value=net.net_min.get(direction) if CONFIG.net_color_fixed else None, round_up_low=True)
-			# ziki: comment out network graph
-			#out += f'{Mv.to(y if direction == "download" else y + cls.graph_height["download"], x)}{Graphs.net[direction](None if stats["redraw"] else stats["speed"][-1])}'
+			# ziki: undo comment out network graph
+			out += f'{Mv.to(y if direction == "download" else y + cls.graph_height["download"], x)}{Graphs.net[direction](None if stats["redraw"] else stats["speed"][-1])}'
 
 			# ziki: comment out download and upload values
 			#out += (f'{Mv.to(by+cy, bx)}{THEME.main_fg}{cls.symbols[direction]} {strings["byte_ps"]:<10.10}' +
