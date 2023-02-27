@@ -2402,8 +2402,8 @@ class NetBox(Box, SubBox):
 		if not "net" in cls.boxes: return ""
 		return f'{create_box(box=cls, line_color=THEME.net_box)}'
 		# ziki: substituted netbox + download/upload sub-box with a single clear box instruction
-		#return f'{create_box(box=cls, line_color=THEME.net_box)}\
-		#{create_box(x=cls.box_x, y=cls.box_y, width=cls.box_width, height=cls.box_height, line_color=THEME.div_line, fill=False, title="Download", title2="Upload")}'
+		return f'{create_box(box=cls, line_color=THEME.net_box)}\
+		{create_box(x=cls.box_x, y=cls.box_y, width=cls.box_width, height=cls.box_height, line_color=THEME.div_line, fill=False, title="Download", title2="Upload")}'
 
 	@classmethod
 	def _draw_fg(cls):
