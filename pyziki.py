@@ -2266,9 +2266,9 @@ class MemBox(Box):
 				if cy > h - 1: break
 				if Collector.collect_interrupt: return
 				if cls.mem_size > 2:
-					# ziki: TEMP hide main memory contents
-					out += (f'{Mv.to(y+cy, x+cx)}{gli}{name.capitalize()[:None if big_mem else 5]+":":<{1 if big_mem else 6.6}}{Mv.to(y+cy, x+cx + cls.mem_width - 3 - (len(mem.string[name])))}{Fx.trans(mem.string[name])}'
-							f'{Mv.to(y+cy+1, x+cx)}{gbg}{Meters.mem[name](None if cls.resized else mem.percent[name])}{gmv}{str(mem.percent[name])+"%":>4}')
+					# ziki: re-hide main memory contents
+					# out += (f'{Mv.to(y+cy, x+cx)}{gli}{name.capitalize()[:None if big_mem else 5]+":":<{1 if big_mem else 6.6}}{Mv.to(y+cy, x+cx + cls.mem_width - 3 - (len(mem.string[name])))}{Fx.trans(mem.string[name])}'
+					# 		f'{Mv.to(y+cy+1, x+cx)}{gbg}{Meters.mem[name](None if cls.resized else mem.percent[name])}{gmv}{str(mem.percent[name])+"%":>4}')
 					cy += 2 if not cls.graph_height else cls.graph_height + 1
 				else:
 					# ziki: TEMP hide main memory contents ... continued
