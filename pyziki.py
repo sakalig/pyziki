@@ -2271,8 +2271,8 @@ class MemBox(Box):
 					# 		f'{Mv.to(y+cy+1, x+cx)}{gbg}{Meters.mem[name](None if cls.resized else mem.percent[name])}{gmv}{str(mem.percent[name])+"%":>4}')
 					cy += 2 if not cls.graph_height else cls.graph_height + 1
 				else:
-					# ziki: TEMP hide main memory contents ... continued
-					out += f'{Mv.to(y+cy, x+cx)}{name.capitalize():{5.5 if cls.mem_size > 1 else 1.1}} {gbg}{Meters.mem[name](None if cls.resized else mem.percent[name])}{mem.string[name][:None if cls.mem_size > 1 else -2]:>{9 if cls.mem_size > 1 else 7}}'
+					# ziki: re-hide main memory contents for smaller memory machines
+					#out += f'{Mv.to(y+cy, x+cx)}{name.capitalize():{5.5 if cls.mem_size > 1 else 1.1}} {gbg}{Meters.mem[name](None if cls.resized else mem.percent[name])}{mem.string[name][:None if cls.mem_size > 1 else -2]:>{9 if cls.mem_size > 1 else 7}}'
 					cy += 1 if not cls.graph_height else cls.graph_height
 			#* Swap
 			if cls.swap_on and CONFIG.show_swap and not CONFIG.swap_disk and mem.swap_string:
