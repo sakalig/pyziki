@@ -64,8 +64,8 @@ args.add_argument("-v", "--version",	action="store_true", 			help = "show versio
 args.add_argument("--debug",			action="store_true", 			help = "start with loglevel set to DEBUG overriding value set in config")
 stdargs = args.parse_args()
 
-# ziki: force pyziki to start without net section
-stdargs.boxes = "cpu mem proc"
+# ziki: TEMP force pyziki to start without net section
+#stdargs.boxes = "cpu mem proc"
 
 if stdargs.version:
 	print(f'bpytop version: {VERSION}\n'
@@ -470,8 +470,8 @@ class Config:
 	mem_graphs: bool = True
 	show_swap: bool = True
 	swap_disk: bool = True
-	# ziki: toggle show_disks to 'False' but still revealing graphs
-	show_disks: bool = False
+	# ziki: TEMP toggle show_disks to 'False' but still revealing graphs
+	show_disks: bool = True
 	only_physical: bool = True
 	use_fstab: bool = False
 	show_io_stat: bool = True
@@ -1775,7 +1775,8 @@ class Box:
 		else:
 			out = "".join(sub._draw_bg() for sub in cls.__subclasses__()) # type: ignore
 		Draw.buffer("bg", out, now=now, z=1000, only_save=Menu.active, once=True)
-		#cls.draw_update_ms(now=now)
+		# ziki: TEMP
+		cls.draw_update_ms(now=now)
 		if CONFIG.draw_clock: cls.draw_clock(force=True)
 
 class SubBox:
@@ -1976,43 +1977,43 @@ class CpuBox(Box, SubBox):
 		cx = cy = cc = 0
 		ccw = (bw + 1) // cls.box_columns
 		if cpu.cpu_freq:
-			# ziki: add cosmetic 'print()' and comment out overall processor rate in GHz
-			print()
-			#freq: str = f'{cpu.cpu_freq} Mhz' if cpu.cpu_freq < 1000 else f'{float(cpu.cpu_freq / 1000):.1f} GHz'
-			#out += f'{Mv.to(by - 1, bx + bw - 9)}{THEME.div_line(Symbol.title_left)}{Fx.b}{THEME.title(freq)}{Fx.ub}{THEME.div_line(Symbol.title_right)}'
+			# ziki: TEMP add cosmetic 'print()' and comment out overall processor rate in GHz
+			#print()
+			freq: str = f'{cpu.cpu_freq} Mhz' if cpu.cpu_freq < 1000 else f'{float(cpu.cpu_freq / 1000):.1f} GHz'
+			out += f'{Mv.to(by - 1, bx + bw - 9)}{THEME.div_line(Symbol.title_left)}{Fx.b}{THEME.title(freq)}{Fx.ub}{THEME.div_line(Symbol.title_right)}'
 		out += f'{Mv.to(y, x)}{Graphs.cpu["up"](None if cls.resized else cpu.cpu_upper[-1])}'
 		if mid_line:
 			out += (f'{Mv.to(y+hh, x-1)}{THEME.cpu_box(Symbol.title_right)}{THEME.div_line}{Symbol.h_line * (w - bw - 3)}{THEME.div_line(Symbol.title_left)}'
 					f'{Mv.to(y+hh, x+((w-bw)//2)-((len(CONFIG.cpu_graph_upper)+len(CONFIG.cpu_graph_lower))//2)-4)}{THEME.main_fg}{CONFIG.cpu_graph_upper}{Mv.r(1)}▲▼{Mv.r(1)}{CONFIG.cpu_graph_lower}')
 		if not CONFIG.cpu_single_graph and Graphs.cpu.get("down"):
-			# ziki: added cosmetic 'print()' and elevated the position of individual cpus usage(%) 
-			print()
-			#out += f'{Mv.to(y + hh + (1 * mid_line), x)}{Graphs.cpu["down"](None if cls.resized else cpu.cpu_lower[-1])}'
-		# ziki: commented out cpu usage bar
-		#out += (f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b}{"CPU "}{Fx.ub}{Meters.cpu(cpu.cpu_usage[0][-1])}'
-		#		f'{THEME.gradient["cpu"][cpu.cpu_usage[0][-1]]}{cpu.cpu_usage[0][-1]:>4}{THEME.main_fg}%')
+			# ziki: TEMP added cosmetic 'print()' and elevated the position of individual cpus usage(%) 
+			#print()
+			out += f'{Mv.to(y + hh + (1 * mid_line), x)}{Graphs.cpu["down"](None if cls.resized else cpu.cpu_lower[-1])}'
+		# ziki: TEMP commented out cpu usage bar
+		out += (f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b}{"CPU "}{Fx.ub}{Meters.cpu(cpu.cpu_usage[0][-1])}'
+				f'{THEME.gradient["cpu"][cpu.cpu_usage[0][-1]]}{cpu.cpu_usage[0][-1]:>4}{THEME.main_fg}%')
 		if cpu.got_sensors:
 			try:
 				temp, unit = temperature(cpu.cpu_temp[0][-1], CONFIG.temp_scale)
-				# ziki: comment out temp sensor reading
-				#out += (f'{THEME.inactive_fg} ⡀⡀⡀⡀⡀{Mv.l(5)}{THEME.gradient["temp"][min_max(cpu.cpu_temp[0][-1], 0, cpu.cpu_temp_crit) * 100 // cpu.cpu_temp_crit]}{Graphs.temps[0](None if cls.resized else cpu.cpu_temp[0][-1])}'
-				#		f'{temp:>4}{THEME.main_fg}{unit}')
+				# ziki: TEMP comment out temp sensor reading
+				out += (f'{THEME.inactive_fg} ⡀⡀⡀⡀⡀{Mv.l(5)}{THEME.gradient["temp"][min_max(cpu.cpu_temp[0][-1], 0, cpu.cpu_temp_crit) * 100 // cpu.cpu_temp_crit]}{Graphs.temps[0](None if cls.resized else cpu.cpu_temp[0][-1])}'
+						f'{temp:>4}{THEME.main_fg}{unit}')
 			except:
 				cpu.got_sensors = False
 
 		cy += 1
 		for n in range(1, THREADS + 1):
-			# ziki: comment out individual cpus and their usage arranged by groups
-			#out += f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b + "C" + Fx.ub if THREADS < 100 else ""}{str(n):<{2 if cls.column_size == 0 else 3}}'
+			# ziki: TEMP comment out individual cpus and their usage arranged by groups
+			out += f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b + "C" + Fx.ub if THREADS < 100 else ""}{str(n):<{2 if cls.column_size == 0 else 3}}'
 			if cls.column_size > 0 or ct_width > 0:
-				# ziki: added cosmetic 'print()' and comment out mini graphs for individual cpus
-				print()
-				#out += f'{THEME.inactive_fg}{"⡀" * (5 * cls.column_size + ct_width)}{Mv.l(5 * cls.column_size + ct_width)}{THEME.gradient["cpu"][cpu.cpu_usage[n][-1]]}{Graphs.cores[n-1](None if cls.resized else cpu.cpu_usage[n][-1])}'
+				# ziki: TEMP added cosmetic 'print()' and comment out mini graphs for individual cpus
+				#print()
+				out += f'{THEME.inactive_fg}{"⡀" * (5 * cls.column_size + ct_width)}{Mv.l(5 * cls.column_size + ct_width)}{THEME.gradient["cpu"][cpu.cpu_usage[n][-1]]}{Graphs.cores[n-1](None if cls.resized else cpu.cpu_usage[n][-1])}'
 			else:
-				# ziki: add cosmetic 'print()' and comment out individual core utilization in percentage(%)
-				print()
-				#out += f'{THEME.gradient["cpu"][cpu.cpu_usage[n][-1]]}'
-			#out += f'{cpu.cpu_usage[n][-1]:>{3 if cls.column_size < 2 else 4}}{THEME.main_fg}%'
+				# ziki: TEMP add cosmetic 'print()' and comment out individual core utilization in percentage(%)
+				#print()
+				out += f'{THEME.gradient["cpu"][cpu.cpu_usage[n][-1]]}'
+			out += f'{cpu.cpu_usage[n][-1]:>{3 if cls.column_size < 2 else 4}}{THEME.main_fg}%'
 			if cpu.got_sensors and cpu.cpu_temp[n] and not hide_cores:
 				try:
 					temp, unit = temperature(cpu.cpu_temp[n][-1], CONFIG.temp_scale)
@@ -2021,14 +2022,14 @@ class CpuBox(Box, SubBox):
 						out += f'{THEME.inactive_fg} ⡀⡀⡀⡀⡀{Mv.l(5)}{THEME.gradient["temp"][min_max(cpu.cpu_temp[n][-1], 0, cpu.cpu_temp_crit) * 100 // cpu.cpu_temp_crit]}{Graphs.temps[n](None if cls.resized else cpu.cpu_temp[n][-1])}'
 					else:
 						out += f'{THEME.gradient["temp"][min_max(temp, 0, cpu.cpu_temp_crit) * 100 // cpu.cpu_temp_crit]}'
-					# ziki: comment out individual cpu temps
-					#out += f'{temp:>4}{THEME.main_fg}{unit}'
+					# ziki: TEMP comment out individual cpu temps
+					out += f'{temp:>4}{THEME.main_fg}{unit}'
 				except:
 					cpu.got_sensors = False
 			elif cpu.got_sensors and not hide_cores:
 				out += f'{Mv.r(max(6, 6 * cls.column_size))}'
-			# ziki: comment out individual core vertical separators
-			#out += f'{THEME.div_line(Symbol.v_line)}'
+			# ziki: TEMP comment out individual core vertical separators
+			out += f'{THEME.div_line(Symbol.v_line)}'
 			cy += 1
 			if cy > ceil(THREADS/cls.box_columns) and n != THREADS:
 				cc += 1; cy = 1; cx = ccw * cc
@@ -2045,13 +2046,13 @@ class CpuBox(Box, SubBox):
 				lavg = f'L {" ".join(str(round(l, 1)) for l in cpu.load_avg):^11.11}'
 			else:
 				lavg = f'{" ".join(str(round(l, 1)) for l in cpu.load_avg[:2]):^7.7}'
-			# ziki: comment out LAV
-			#out += f'{Mv.to(by + cy, bx + cx)}{THEME.main_fg}{lavg}{THEME.div_line(Symbol.v_line)}'
+			# ziki: TEMP comment out LAV
+			out += f'{Mv.to(by + cy, bx + cx)}{THEME.main_fg}{lavg}{THEME.div_line(Symbol.v_line)}'
 
 		if CONFIG.show_uptime:
-			# add cosmetic 'print()' and comment out uptime
-			print()
-			#out += f'{Mv.to(y + (0 if not CONFIG.cpu_invert_lower or CONFIG.cpu_single_graph else h - 1), x + 1)}{THEME.graph_text}{Fx.trans("up " + cpu.uptime)}'
+			# TEMP add cosmetic 'print()' and comment out uptime
+			#print()
+			out += f'{Mv.to(y + (0 if not CONFIG.cpu_invert_lower or CONFIG.cpu_single_graph else h - 1), x + 1)}{THEME.graph_text}{Fx.trans("up " + cpu.uptime)}'
 
 
 		Draw.buffer(cls.buffer, f'{out_misc}{out}{Term.fg}', only_save=Menu.active)
@@ -2144,11 +2145,11 @@ class MemBox(Box):
 		out: str = ""
 		out += f'{create_box(box=cls, line_color=THEME.mem_box)}'
 		if CONFIG.show_disks:
-			# ziki: comment out disks section
-			#out += (f'{Mv.to(cls.y, cls.divider + 2)}{THEME.mem_box(Symbol.title_left)}{Fx.b}{THEME.hi_fg("d")}{THEME.title("isks")}{Fx.ub}{THEME.mem_box(Symbol.title_right)}'
-			#		f'{Mv.to(cls.y, cls.divider)}{THEME.mem_box(Symbol.div_up)}'
-			#		f'{Mv.to(cls.y + cls.height - 1, cls.divider)}{THEME.mem_box(Symbol.div_down)}{THEME.div_line}'
-			#		f'{"".join(f"{Mv.to(cls.y + i, cls.divider)}{Symbol.v_line}" for i in range(1, cls.height - 1))}')
+			# ziki: TEMP comment out disks section
+			out += (f'{Mv.to(cls.y, cls.divider + 2)}{THEME.mem_box(Symbol.title_left)}{Fx.b}{THEME.hi_fg("d")}{THEME.title("isks")}{Fx.ub}{THEME.mem_box(Symbol.title_right)}'
+					f'{Mv.to(cls.y, cls.divider)}{THEME.mem_box(Symbol.div_up)}'
+					f'{Mv.to(cls.y + cls.height - 1, cls.divider)}{THEME.mem_box(Symbol.div_down)}{THEME.div_line}'
+					f'{"".join(f"{Mv.to(cls.y + i, cls.divider)}{Symbol.v_line}" for i in range(1, cls.height - 1))}')
 			Key.mouse["d"] = [[cls.divider + 3 + i, cls.y] for i in range(5)]
 		else:
 			out += f'{Mv.to(cls.y, cls.x + cls.width - 9)}{THEME.mem_box(Symbol.title_left)}{THEME.hi_fg("d")}{THEME.title("isks")}{THEME.mem_box(Symbol.title_right)}'
@@ -2179,9 +2180,9 @@ class MemBox(Box):
 					if CONFIG.mem_graphs:
 						Meters.mem[name] = Graph(cls.mem_meter, cls.graph_height, THEME.gradient[name], mem.vlist[name])
 					else:
-						# ziki: comment out memory graphs
-						print()
-						#Meters.mem[name] = Meter(mem.percent[name], cls.mem_meter, name)
+						# ziki: TEMP comment out memory graphs
+						#print()
+						Meters.mem[name] = Meter(mem.percent[name], cls.mem_meter, name)
 				if cls.swap_on:
 					for name in cls.swap_names:
 						if CONFIG.swap_disk and CONFIG.show_disks:
@@ -2249,12 +2250,12 @@ class MemBox(Box):
 			#* Mem
 			cx = 1; cy = 1
 
-			# ziki: hide 'Total' label from mem box
-			#out += f'{Mv.to(y, x+1)}{THEME.title}{Fx.b}Total:{mem.string["total"]:>{cls.mem_width - 9}}{Fx.ub}{THEME.main_fg}'
+			# ziki: TEMP hide 'Total' label from mem box
+			out += f'{Mv.to(y, x+1)}{THEME.title}{Fx.b}Total:{mem.string["total"]:>{cls.mem_width - 9}}{Fx.ub}{THEME.main_fg}'
 			if cls.graph_height > 0:
-				# ziki: add cosmetic 'print()' and hide mem box separators; these have been hidden without commenting out the 'out' string ... better hiding opportunity 
-				print()
-				#gli = f'{Mv.l(2)}{THEME.mem_box(Symbol.title_right)}{THEME.div_line}{Symbol.h_line * (cls.mem_width - 1)}{"" if CONFIG.show_disks else THEME.mem_box}{Symbol.title_left}{Mv.l(cls.mem_width - 1)}{THEME.title}'
+				# ziki: TEMP add cosmetic 'print()' and hide mem box separators; these have been hidden without commenting out the 'out' string ... better hiding opportunity 
+				#print()
+				gli = f'{Mv.l(2)}{THEME.mem_box(Symbol.title_right)}{THEME.div_line}{Symbol.h_line * (cls.mem_width - 1)}{"" if CONFIG.show_disks else THEME.mem_box}{Symbol.title_left}{Mv.l(cls.mem_width - 1)}{THEME.title}'
 			if cls.graph_height >= 2:
 				gbg = f'{Mv.l(1)}'
 				gmv = f'{Mv.l(cls.mem_width - 2)}{Mv.u(cls.graph_height - 1)}'
@@ -2264,13 +2265,13 @@ class MemBox(Box):
 				if cy > h - 1: break
 				if Collector.collect_interrupt: return
 				if cls.mem_size > 2:
-					# ziki: hide main memory contents
-					#out += (f'{Mv.to(y+cy, x+cx)}{gli}{name.capitalize()[:None if big_mem else 5]+":":<{1 if big_mem else 6.6}}{Mv.to(y+cy, x+cx + cls.mem_width - 3 - (len(mem.string[name])))}{Fx.trans(mem.string[name])}'
-					#		f'{Mv.to(y+cy+1, x+cx)}{gbg}{Meters.mem[name](None if cls.resized else mem.percent[name])}{gmv}{str(mem.percent[name])+"%":>4}')
+					# ziki: TEMP hide main memory contents
+					out += (f'{Mv.to(y+cy, x+cx)}{gli}{name.capitalize()[:None if big_mem else 5]+":":<{1 if big_mem else 6.6}}{Mv.to(y+cy, x+cx + cls.mem_width - 3 - (len(mem.string[name])))}{Fx.trans(mem.string[name])}'
+							f'{Mv.to(y+cy+1, x+cx)}{gbg}{Meters.mem[name](None if cls.resized else mem.percent[name])}{gmv}{str(mem.percent[name])+"%":>4}')
 					cy += 2 if not cls.graph_height else cls.graph_height + 1
 				else:
-					# ziki: hide main memory contents ... continued
-					#out += f'{Mv.to(y+cy, x+cx)}{name.capitalize():{5.5 if cls.mem_size > 1 else 1.1}} {gbg}{Meters.mem[name](None if cls.resized else mem.percent[name])}{mem.string[name][:None if cls.mem_size > 1 else -2]:>{9 if cls.mem_size > 1 else 7}}'
+					# ziki: TEMP hide main memory contents ... continued
+					out += f'{Mv.to(y+cy, x+cx)}{name.capitalize():{5.5 if cls.mem_size > 1 else 1.1}} {gbg}{Meters.mem[name](None if cls.resized else mem.percent[name])}{mem.string[name][:None if cls.mem_size > 1 else -2]:>{9 if cls.mem_size > 1 else 7}}'
 					cy += 1 if not cls.graph_height else cls.graph_height
 			#* Swap
 			if cls.swap_on and CONFIG.show_swap and not CONFIG.swap_disk and mem.swap_string:
@@ -2278,21 +2279,21 @@ class MemBox(Box):
 					if cls.graph_height > 0: out += f'{Mv.to(y+cy, x+cx)}{gli}'
 					cy += 1
 
-				# ziki: comment out swap
-				#out += f'{Mv.to(y+cy, x+cx)}{THEME.title}{Fx.b}Swap:{mem.swap_string["total"]:>{cls.mem_width - 8}}{Fx.ub}{THEME.main_fg}'
+				# ziki: TEMP comment out swap
+				out += f'{Mv.to(y+cy, x+cx)}{THEME.title}{Fx.b}Swap:{mem.swap_string["total"]:>{cls.mem_width - 8}}{Fx.ub}{THEME.main_fg}'
 				cy += 1
 				for name in cls.swap_names:
 					if cy > h - 1: break
 					if Collector.collect_interrupt: return
 					if cls.mem_size > 2:
-						# ziki: hide swap contents
-						#out += (f'{Mv.to(y+cy, x+cx)}{gli}{name.capitalize()[:None if big_mem else 5]+":":<{1 if big_mem else 6.6}}{Mv.to(y+cy, x+cx + cls.mem_width - 3 - (len(mem.swap_string[name])))}{Fx.trans(mem.swap_string[name])}'
-						#		f'{Mv.to(y+cy+1, x+cx)}{gbg}{Meters.swap[name](None if cls.resized else mem.swap_percent[name])}{gmv}{str(mem.swap_percent[name])+"%":>4}')
+						# ziki: TEMP hide swap contents
+						out += (f'{Mv.to(y+cy, x+cx)}{gli}{name.capitalize()[:None if big_mem else 5]+":":<{1 if big_mem else 6.6}}{Mv.to(y+cy, x+cx + cls.mem_width - 3 - (len(mem.swap_string[name])))}{Fx.trans(mem.swap_string[name])}'
+								f'{Mv.to(y+cy+1, x+cx)}{gbg}{Meters.swap[name](None if cls.resized else mem.swap_percent[name])}{gmv}{str(mem.swap_percent[name])+"%":>4}')
 						cy += 2 if not cls.graph_height else cls.graph_height + 1
 					else:
-						# ziki: add cosmetic 'print()' and comment out swap values: 'Used' and 'Free' 
-						print()
-						#out += f'{Mv.to(y+cy, x+cx)}{name.capitalize():{5.5 if cls.mem_size > 1 else 1.1}} {gbg}{Meters.swap[name](None if cls.resized else mem.swap_percent[name])}{mem.swap_string[name][:None if cls.mem_size > 1 else -2]:>{9 if cls.mem_size > 1 else 7}}'; cy += 1 if not cls.graph_height else cls.graph_height
+						# ziki: TEMP add cosmetic 'print()' and comment out swap values: 'Used' and 'Free' 
+						#print()
+						out += f'{Mv.to(y+cy, x+cx)}{name.capitalize():{5.5 if cls.mem_size > 1 else 1.1}} {gbg}{Meters.swap[name](None if cls.resized else mem.swap_percent[name])}{mem.swap_string[name][:None if cls.mem_size > 1 else -2]:>{9 if cls.mem_size > 1 else 7}}'; cy += 1 if not cls.graph_height else cls.graph_height
 
 			if cls.graph_height > 0 and not cy == h: out += f'{Mv.to(y+cy, x+cx)}{gli}'
 
@@ -2335,31 +2336,31 @@ class MemBox(Box):
 						if not name in Meters.disks_used:
 							continue
 						if cy > h - 1: break
-						# ziki: comment out disks line separators
-						#out += Fx.trans(f'{Mv.to(y+cy, x+cx)}{gli}{THEME.title}{Fx.b}{item["name"]:{cls.disks_width - 2}.12}{Mv.to(y+cy, x + cx + cls.disks_width - 11)}{item["total"][:None if big_disk else -2]:>9}')
+						# ziki: TEMP comment out disks line separators
+						out += Fx.trans(f'{Mv.to(y+cy, x+cx)}{gli}{THEME.title}{Fx.b}{item["name"]:{cls.disks_width - 2}.12}{Mv.to(y+cy, x + cx + cls.disks_width - 11)}{item["total"][:None if big_disk else -2]:>9}')
 						if big_disk:
-							print()
-							#out += f'{Mv.to(y+cy, x + cx + (cls.disks_width // 2) - (len(item["io"]) // 2) - 2)}{Fx.ub}{THEME.main_fg}{Fx.trans(item["io"])}'
+							#print()
+							out += f'{Mv.to(y+cy, x + cx + (cls.disks_width // 2) - (len(item["io"]) // 2) - 2)}{Fx.ub}{THEME.main_fg}{Fx.trans(item["io"])}'
 						cy += 1
 						if cy > h - 1: break
 						if CONFIG.show_io_stat and name in Graphs.disk_io:
-							# ziki: comment out disk IO
-							#out += f'{Mv.to(y+cy, x+cx-1)}{THEME.main_fg}{Fx.ub}{" IO: " if big_disk else " IO   " + Mv.l(2)}{Fx.ub}{Graphs.disk_io[name]["rw"](None if cls.redraw else mem.disks_io_dict[name]["rw"][-1])}'
+							# ziki: TEMP comment out disk IO
+							out += f'{Mv.to(y+cy, x+cx-1)}{THEME.main_fg}{Fx.ub}{" IO: " if big_disk else " IO   " + Mv.l(2)}{Fx.ub}{Graphs.disk_io[name]["rw"](None if cls.redraw else mem.disks_io_dict[name]["rw"][-1])}'
 							if not big_disk and item["io"]:
 								out += f'{Mv.to(y+cy, x+cx-1)}{Fx.ub}{THEME.main_fg}{item["io"]}'
 							cy += 1
 							if cy > h - 1: break
-						# ziki: comment out disk 'Used' values(%)
-						#out += Mv.to(y+cy, x+cx) + (f'Used:{str(item["used_percent"]) + "%":>4} ' if big_disk else "U ")
-						#out += f'{Meters.disks_used[name](None if cls.resized else mem.disks[name]["used_percent"])}{item["used"][:None if big_disk else -2]:>{9 if big_disk else 7}}'
+						# ziki: TEMP comment out disk 'Used' values(%)
+						out += Mv.to(y+cy, x+cx) + (f'Used:{str(item["used_percent"]) + "%":>4} ' if big_disk else "U ")
+						out += f'{Meters.disks_used[name](None if cls.resized else mem.disks[name]["used_percent"])}{item["used"][:None if big_disk else -2]:>{9 if big_disk else 7}}'
 						cy += 1
 
 						if len(mem.disks) * 3 + (len(mem.disks_io_dict) if CONFIG.show_io_stat else 0) <= h + 1:
 							if cy > h - 1: break
 							out += Mv.to(y+cy, x+cx)
-							# ziki: hide 'Free' storage space on disks: meter and percentage label
-							#out += f'Free:{str(item["free_percent"]) + "%":>4} ' if big_disk else f'{"F "}'
-							#out += f'{Meters.disks_free[name](None if cls.resized else mem.disks[name]["free_percent"])}{item["free"][:None if big_disk else -2]:>{9 if big_disk else 7}}'
+							# ziki: TEMP hide 'Free' storage space on disks: meter and percentage label
+							out += f'Free:{str(item["free_percent"]) + "%":>4} ' if big_disk else f'{"F "}'
+							out += f'{Meters.disks_free[name](None if cls.resized else mem.disks[name]["free_percent"])}{item["free"][:None if big_disk else -2]:>{9 if big_disk else 7}}'
 							cy += 1
 							if len(mem.disks) * 4 + (len(mem.disks_io_dict) if CONFIG.show_io_stat else 0) <= h + 1: cy += 1
 		except (KeyError, TypeError):
@@ -4732,7 +4733,8 @@ class Menu:
 				if pages:
 					out += (f'{Mv.to(y+h+1, x+11)}{THEME.div_line(Symbol.title_left)}{Fx.b}{THEME.title("pg")}{Fx.ub}{THEME.main_fg(Symbol.up)} {Fx.b}{THEME.title}{page}/{pages} '
 					f'pg{Fx.ub}{THEME.main_fg(Symbol.down)}{THEME.div_line(Symbol.title_right)}')
-				#out += f'{Mv.to(y+1, x+1)}{THEME.title}{Fx.b}{"Keys:":^20}Description:{THEME.main_fg}'
+				# ziki: TEMP
+				out += f'{Mv.to(y+1, x+1)}{THEME.title}{Fx.b}{"Keys:":^20}Description:{THEME.main_fg}'
 				for n, opt in enumerate(option_items):
 					if pages and n < (page - 1) * ceil(h / 2): continue
 					value = getattr(CONFIG, opt)
@@ -5424,7 +5426,7 @@ def process_keys():
 	mouse_pos: Tuple[int, int] = (0, 0)
 	filtered: bool = False
 	# ziki: remove net box toggle
-	box_keys = {"1" : "cpu", "2" : "mem", "4" : "proc"}
+	box_keys = {"1" : "cpu", "2" : "mem", "3" : "net", "4" : "proc"}
 	while Key.has_key():
 		key = Key.get()
 		found: bool = True
