@@ -2028,7 +2028,7 @@ class CpuBox(Box, SubBox):
 			elif cpu.got_sensors and not hide_cores:
 				out += f'{Mv.r(max(6, 6 * cls.column_size))}'
 			# ziki: TEMP comment out individual core vertical separators
-			out += f'{THEME.div_line(Symbol.v_line)}'
+			#out += f'{THEME.div_line(Symbol.v_line)}'
 			cy += 1
 			if cy > ceil(THREADS/cls.box_columns) and n != THREADS:
 				cc += 1; cy = 1; cx = ccw * cc
