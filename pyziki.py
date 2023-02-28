@@ -1994,9 +1994,9 @@ class CpuBox(Box, SubBox):
 		if cpu.got_sensors:
 			try:
 				temp, unit = temperature(cpu.cpu_temp[0][-1], CONFIG.temp_scale)
-				# ziki: TEMP comment out temp sensor reading
-				out += (f'{THEME.inactive_fg} ⡀⡀⡀⡀⡀{Mv.l(5)}{THEME.gradient["temp"][min_max(cpu.cpu_temp[0][-1], 0, cpu.cpu_temp_crit) * 100 // cpu.cpu_temp_crit]}{Graphs.temps[0](None if cls.resized else cpu.cpu_temp[0][-1])}'
-						f'{temp:>4}{THEME.main_fg}{unit}')
+				# ziki: re-hide temp sensor reading
+				#out += (f'{THEME.inactive_fg} ⡀⡀⡀⡀⡀{Mv.l(5)}{THEME.gradient["temp"][min_max(cpu.cpu_temp[0][-1], 0, cpu.cpu_temp_crit) * 100 // cpu.cpu_temp_crit]}{Graphs.temps[0](None if cls.resized else cpu.cpu_temp[0][-1])}'
+				#		f'{temp:>4}{THEME.main_fg}{unit}')
 			except:
 				cpu.got_sensors = False
 
@@ -2021,7 +2021,7 @@ class CpuBox(Box, SubBox):
 						out += f'{THEME.inactive_fg} ⡀⡀⡀⡀⡀{Mv.l(5)}{THEME.gradient["temp"][min_max(cpu.cpu_temp[n][-1], 0, cpu.cpu_temp_crit) * 100 // cpu.cpu_temp_crit]}{Graphs.temps[n](None if cls.resized else cpu.cpu_temp[n][-1])}'
 					else:
 						out += f'{THEME.gradient["temp"][min_max(temp, 0, cpu.cpu_temp_crit) * 100 // cpu.cpu_temp_crit]}'
-					# ziki: TEMP comment out individual cpu temps
+					# ziki: re-hide individual cpu temps
 					#out += f'{temp:>4}{THEME.main_fg}{unit}'
 				except:
 					cpu.got_sensors = False
