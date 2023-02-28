@@ -1977,8 +1977,7 @@ class CpuBox(Box, SubBox):
 		cx = cy = cc = 0
 		ccw = (bw + 1) // cls.box_columns
 		if cpu.cpu_freq:
-			# ziki: TEMP add cosmetic 'print()' and comment out overall processor rate in GHz
-			#print()
+			# ziki: re-hide overall processor rate in GHz
 			freq: str = f'{cpu.cpu_freq} Mhz' if cpu.cpu_freq < 1000 else f'{float(cpu.cpu_freq / 1000):.1f} GHz'
 			#out += f'{Mv.to(by - 1, bx + bw - 9)}{THEME.div_line(Symbol.title_left)}{Fx.b}{THEME.title(freq)}{Fx.ub}{THEME.div_line(Symbol.title_right)}'
 		out += f'{Mv.to(y, x)}{Graphs.cpu["up"](None if cls.resized else cpu.cpu_upper[-1])}'
@@ -1986,12 +1985,12 @@ class CpuBox(Box, SubBox):
 			out += (f'{Mv.to(y+hh, x-1)}{THEME.cpu_box(Symbol.title_right)}{THEME.div_line}{Symbol.h_line * (w - bw - 3)}{THEME.div_line(Symbol.title_left)}'
 					f'{Mv.to(y+hh, x+((w-bw)//2)-((len(CONFIG.cpu_graph_upper)+len(CONFIG.cpu_graph_lower))//2)-4)}{THEME.main_fg}{CONFIG.cpu_graph_upper}{Mv.r(1)}▲▼{Mv.r(1)}{CONFIG.cpu_graph_lower}')
 		if not CONFIG.cpu_single_graph and Graphs.cpu.get("down"):
-			# ziki: TEMP added cosmetic 'print()' and elevated the position of individual cpus usage(%) 
-			#print()
-			out += f'{Mv.to(y + hh + (1 * mid_line), x)}{Graphs.cpu["down"](None if cls.resized else cpu.cpu_lower[-1])}'
-		# ziki: TEMP commented out cpu usage bar
-		out += (f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b}{"CPU "}{Fx.ub}{Meters.cpu(cpu.cpu_usage[0][-1])}'
-				f'{THEME.gradient["cpu"][cpu.cpu_usage[0][-1]]}{cpu.cpu_usage[0][-1]:>4}{THEME.main_fg}%')
+			# ziki: re-elevate dangling cpus usage(%) 
+			pass
+			#out += f'{Mv.to(y + hh + (1 * mid_line), x)}{Graphs.cpu["down"](None if cls.resized else cpu.cpu_lower[-1])}'
+		# ziki: re-hide cpu usage bar
+		#out += (f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b}{"CPU "}{Fx.ub}{Meters.cpu(cpu.cpu_usage[0][-1])}'
+		#		f'{THEME.gradient["cpu"][cpu.cpu_usage[0][-1]]}{cpu.cpu_usage[0][-1]:>4}{THEME.main_fg}%')
 		if cpu.got_sensors:
 			try:
 				temp, unit = temperature(cpu.cpu_temp[0][-1], CONFIG.temp_scale)
