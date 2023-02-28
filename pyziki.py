@@ -2045,13 +2045,13 @@ class CpuBox(Box, SubBox):
 				lavg = f'L {" ".join(str(round(l, 1)) for l in cpu.load_avg):^11.11}'
 			else:
 				lavg = f'{" ".join(str(round(l, 1)) for l in cpu.load_avg[:2]):^7.7}'
-			# ziki: TEMP comment out LAV
+			# ziki: re-hide LAV
 			#out += f'{Mv.to(by + cy, bx + cx)}{THEME.main_fg}{lavg}{THEME.div_line(Symbol.v_line)}'
 
 		if CONFIG.show_uptime:
-			# TEMP add cosmetic 'print()' and comment out uptime
-			#print()
-			out += f'{Mv.to(y + (0 if not CONFIG.cpu_invert_lower or CONFIG.cpu_single_graph else h - 1), x + 1)}{THEME.graph_text}{Fx.trans("up " + cpu.uptime)}'
+			# ziki: re-hide uptime
+			pass
+			#out += f'{Mv.to(y + (0 if not CONFIG.cpu_invert_lower or CONFIG.cpu_single_graph else h - 1), x + 1)}{THEME.graph_text}{Fx.trans("up " + cpu.uptime)}'
 
 
 		Draw.buffer(cls.buffer, f'{out_misc}{out}{Term.fg}', only_save=Menu.active)
