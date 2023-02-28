@@ -64,8 +64,8 @@ args.add_argument("-v", "--version",	action="store_true", 			help = "show versio
 args.add_argument("--debug",			action="store_true", 			help = "start with loglevel set to DEBUG overriding value set in config")
 stdargs = args.parse_args()
 
-# ziki: TEMP force pyziki to start without net section
-#stdargs.boxes = "cpu mem proc"
+# ziki: re-undo force pyziki to start without net section
+stdargs.boxes = "cpu mem proc"
 
 if stdargs.version:
 	print(f'bpytop version: {VERSION}\n'
@@ -2018,7 +2018,7 @@ class CpuBox(Box, SubBox):
 				try:
 					temp, unit = temperature(cpu.cpu_temp[n][-1], CONFIG.temp_scale)
 					if cls.column_size > 1:
-						print()
+						#print()
 						out += f'{THEME.inactive_fg} ⡀⡀⡀⡀⡀{Mv.l(5)}{THEME.gradient["temp"][min_max(cpu.cpu_temp[n][-1], 0, cpu.cpu_temp_crit) * 100 // cpu.cpu_temp_crit]}{Graphs.temps[n](None if cls.resized else cpu.cpu_temp[n][-1])}'
 					else:
 						out += f'{THEME.gradient["temp"][min_max(temp, 0, cpu.cpu_temp_crit) * 100 // cpu.cpu_temp_crit]}'
