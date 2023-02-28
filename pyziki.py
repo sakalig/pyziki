@@ -2280,16 +2280,16 @@ class MemBox(Box):
 					if cls.graph_height > 0: out += f'{Mv.to(y+cy, x+cx)}{gli}'
 					cy += 1
 
-				# ziki: TEMP comment out swap
-				out += f'{Mv.to(y+cy, x+cx)}{THEME.title}{Fx.b}Swap:{mem.swap_string["total"]:>{cls.mem_width - 8}}{Fx.ub}{THEME.main_fg}'
+				# ziki: re-hide swap title
+				#out += f'{Mv.to(y+cy, x+cx)}{THEME.title}{Fx.b}Swap:{mem.swap_string["total"]:>{cls.mem_width - 8}}{Fx.ub}{THEME.main_fg}'
 				cy += 1
 				for name in cls.swap_names:
 					if cy > h - 1: break
 					if Collector.collect_interrupt: return
 					if cls.mem_size > 2:
-						# ziki: TEMP hide swap contents
-						out += (f'{Mv.to(y+cy, x+cx)}{gli}{name.capitalize()[:None if big_mem else 5]+":":<{1 if big_mem else 6.6}}{Mv.to(y+cy, x+cx + cls.mem_width - 3 - (len(mem.swap_string[name])))}{Fx.trans(mem.swap_string[name])}'
-								f'{Mv.to(y+cy+1, x+cx)}{gbg}{Meters.swap[name](None if cls.resized else mem.swap_percent[name])}{gmv}{str(mem.swap_percent[name])+"%":>4}')
+						# ziki: re-hide swap contents
+						# out += (f'{Mv.to(y+cy, x+cx)}{gli}{name.capitalize()[:None if big_mem else 5]+":":<{1 if big_mem else 6.6}}{Mv.to(y+cy, x+cx + cls.mem_width - 3 - (len(mem.swap_string[name])))}{Fx.trans(mem.swap_string[name])}'
+						# 		f'{Mv.to(y+cy+1, x+cx)}{gbg}{Meters.swap[name](None if cls.resized else mem.swap_percent[name])}{gmv}{str(mem.swap_percent[name])+"%":>4}')
 						cy += 2 if not cls.graph_height else cls.graph_height + 1
 					else:
 						# ziki: TEMP add cosmetic 'print()' and comment out swap values: 'Used' and 'Free' 
