@@ -2022,7 +2022,7 @@ class CpuBox(Box, SubBox):
 					else:
 						out += f'{THEME.gradient["temp"][min_max(temp, 0, cpu.cpu_temp_crit) * 100 // cpu.cpu_temp_crit]}'
 					# ziki: TEMP comment out individual cpu temps
-					out += f'{temp:>4}{THEME.main_fg}{unit}'
+					#out += f'{temp:>4}{THEME.main_fg}{unit}'
 				except:
 					cpu.got_sensors = False
 			elif cpu.got_sensors and not hide_cores:
