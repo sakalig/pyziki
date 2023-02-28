@@ -2146,11 +2146,11 @@ class MemBox(Box):
 		out: str = ""
 		out += f'{create_box(box=cls, line_color=THEME.mem_box)}'
 		if CONFIG.show_disks:
-			# ziki: TEMP comment out disks section
-			out += (f'{Mv.to(cls.y, cls.divider + 2)}{THEME.mem_box(Symbol.title_left)}{Fx.b}{THEME.hi_fg("d")}{THEME.title("isks")}{Fx.ub}{THEME.mem_box(Symbol.title_right)}'
-					f'{Mv.to(cls.y, cls.divider)}{THEME.mem_box(Symbol.div_up)}'
-					f'{Mv.to(cls.y + cls.height - 1, cls.divider)}{THEME.mem_box(Symbol.div_down)}{THEME.div_line}'
-					f'{"".join(f"{Mv.to(cls.y + i, cls.divider)}{Symbol.v_line}" for i in range(1, cls.height - 1))}')
+			# ziki: re-hide disks section
+			# out += (f'{Mv.to(cls.y, cls.divider + 2)}{THEME.mem_box(Symbol.title_left)}{Fx.b}{THEME.hi_fg("d")}{THEME.title("isks")}{Fx.ub}{THEME.mem_box(Symbol.title_right)}'
+			# 		f'{Mv.to(cls.y, cls.divider)}{THEME.mem_box(Symbol.div_up)}'
+			# 		f'{Mv.to(cls.y + cls.height - 1, cls.divider)}{THEME.mem_box(Symbol.div_down)}{THEME.div_line}'
+			# 		f'{"".join(f"{Mv.to(cls.y + i, cls.divider)}{Symbol.v_line}" for i in range(1, cls.height - 1))}')
 			Key.mouse["d"] = [[cls.divider + 3 + i, cls.y] for i in range(5)]
 		else:
 			out += f'{Mv.to(cls.y, cls.x + cls.width - 9)}{THEME.mem_box(Symbol.title_left)}{THEME.hi_fg("d")}{THEME.title("isks")}{THEME.mem_box(Symbol.title_right)}'
