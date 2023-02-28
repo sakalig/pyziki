@@ -2002,8 +2002,9 @@ class CpuBox(Box, SubBox):
 
 		cy += 1
 		for n in range(1, THREADS + 1):
-			# ziki: TEMP comment out individual cpus and their usage arranged by groups
-			out += f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b + "C" + Fx.ub if THREADS < 100 else ""}{str(n):<{2 if cls.column_size == 0 else 3}}'
+			# ziki: TEMP comment out individual cpus and their usage arranged by groups ... song; artist; album placement
+			# out += f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b + "C" + Fx.ub if THREADS < 100 else ""}{str(n):<{2 if cls.column_size == 0 else 3}}'
+			#out += f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}'
 			if cls.column_size > 0 or ct_width > 0:
 				# ziki: re-hide mini graphs for individual cpus
 				pass
@@ -2017,8 +2018,9 @@ class CpuBox(Box, SubBox):
 				try:
 					temp, unit = temperature(cpu.cpu_temp[n][-1], CONFIG.temp_scale)
 					if cls.column_size > 1:
-						#print()
-						out += f'{THEME.inactive_fg} ⡀⡀⡀⡀⡀{Mv.l(5)}{THEME.gradient["temp"][min_max(cpu.cpu_temp[n][-1], 0, cpu.cpu_temp_crit) * 100 // cpu.cpu_temp_crit]}{Graphs.temps[n](None if cls.resized else cpu.cpu_temp[n][-1])}'
+						pass
+						# ziki: hide individual logical core graphs
+						#out += f'{THEME.inactive_fg} ⡀⡀⡀⡀⡀{Mv.l(5)}{THEME.gradient["temp"][min_max(cpu.cpu_temp[n][-1], 0, cpu.cpu_temp_crit) * 100 // cpu.cpu_temp_crit]}{Graphs.temps[n](None if cls.resized else cpu.cpu_temp[n][-1])}'
 					else:
 						out += f'{THEME.gradient["temp"][min_max(temp, 0, cpu.cpu_temp_crit) * 100 // cpu.cpu_temp_crit]}'
 					# ziki: re-hide individual cpu temps
