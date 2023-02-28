@@ -2254,9 +2254,9 @@ class MemBox(Box):
 			# ziki: re-hide 'Total' label from mem box
 			#out += f'{Mv.to(y, x+1)}{THEME.title}{Fx.b}Total:{mem.string["total"]:>{cls.mem_width - 9}}{Fx.ub}{THEME.main_fg}'
 			if cls.graph_height > 0:
-				# ziki: TEMP add cosmetic 'print()' and hide mem box separators; these have been hidden without commenting out the 'out' string ... better hiding opportunity 
-				#print()
-				gli = f'{Mv.l(2)}{THEME.mem_box(Symbol.title_right)}{THEME.div_line}{Symbol.h_line * (cls.mem_width - 1)}{"" if CONFIG.show_disks else THEME.mem_box}{Symbol.title_left}{Mv.l(cls.mem_width - 1)}{THEME.title}'
+				# ziki: re-hide mem box separators; these have been hidden without commenting out the 'out' string ... better hiding opportunity 
+				pass
+				#gli = f'{Mv.l(2)}{THEME.mem_box(Symbol.title_right)}{THEME.div_line}{Symbol.h_line * (cls.mem_width - 1)}{"" if CONFIG.show_disks else THEME.mem_box}{Symbol.title_left}{Mv.l(cls.mem_width - 1)}{THEME.title}'
 			if cls.graph_height >= 2:
 				gbg = f'{Mv.l(1)}'
 				gmv = f'{Mv.l(cls.mem_width - 2)}{Mv.u(cls.graph_height - 1)}'
