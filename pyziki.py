@@ -2005,14 +2005,14 @@ class CpuBox(Box, SubBox):
 			# ziki: TEMP comment out individual cpus and their usage arranged by groups
 			out += f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b + "C" + Fx.ub if THREADS < 100 else ""}{str(n):<{2 if cls.column_size == 0 else 3}}'
 			if cls.column_size > 0 or ct_width > 0:
-				# ziki: TEMP added cosmetic 'print()' and comment out mini graphs for individual cpus
+				# ziki: re-hide mini graphs for individual cpus
 				pass
 				#out += f'{THEME.inactive_fg}{"⡀" * (5 * cls.column_size + ct_width)}{Mv.l(5 * cls.column_size + ct_width)}{THEME.gradient["cpu"][cpu.cpu_usage[n][-1]]}{Graphs.cores[n-1](None if cls.resized else cpu.cpu_usage[n][-1])}'
 			else:
-				# ziki: TEMP add cosmetic 'print()' and comment out individual core utilization in percentage(%)
-				#print()
+				# ziki: re-hide individual core utilization in percentage(%)
+				pass
 				out += f'{THEME.gradient["cpu"][cpu.cpu_usage[n][-1]]}'
-			out += f'{cpu.cpu_usage[n][-1]:>{3 if cls.column_size < 2 else 4}}{THEME.main_fg}%'
+			#out += f'{cpu.cpu_usage[n][-1]:>{3 if cls.column_size < 2 else 4}}{THEME.main_fg}%'
 			if cpu.got_sensors and cpu.cpu_temp[n] and not hide_cores:
 				try:
 					temp, unit = temperature(cpu.cpu_temp[n][-1], CONFIG.temp_scale)
