@@ -2360,9 +2360,9 @@ class MemBox(Box):
 						if len(mem.disks) * 3 + (len(mem.disks_io_dict) if CONFIG.show_io_stat else 0) <= h + 1:
 							if cy > h - 1: break
 							out += Mv.to(y+cy, x+cx)
-							# ziki: TEMP hide 'Free' storage space on disks: meter and percentage label
-							out += f'Free:{str(item["free_percent"]) + "%":>4} ' if big_disk else f'{"F "}'
-							out += f'{Meters.disks_free[name](None if cls.resized else mem.disks[name]["free_percent"])}{item["free"][:None if big_disk else -2]:>{9 if big_disk else 7}}'
+							# ziki: re-hide 'Free' storage space on disks: meter and percentage label
+							#out += f'Free:{str(item["free_percent"]) + "%":>4} ' if big_disk else f'{"F "}'
+							#out += f'{Meters.disks_free[name](None if cls.resized else mem.disks[name]["free_percent"])}{item["free"][:None if big_disk else -2]:>{9 if big_disk else 7}}'
 							cy += 1
 							if len(mem.disks) * 4 + (len(mem.disks_io_dict) if CONFIG.show_io_stat else 0) <= h + 1: cy += 1
 		except (KeyError, TypeError):
