@@ -2027,7 +2027,7 @@ class CpuBox(Box, SubBox):
 					cpu.got_sensors = False
 			elif cpu.got_sensors and not hide_cores:
 				out += f'{Mv.r(max(6, 6 * cls.column_size))}'
-			# ziki: TEMP comment out individual core vertical separators
+			# ziki: re-hide individual core vertical separators
 			#out += f'{THEME.div_line(Symbol.v_line)}'
 			cy += 1
 			if cy > ceil(THREADS/cls.box_columns) and n != THREADS:
@@ -2046,7 +2046,7 @@ class CpuBox(Box, SubBox):
 			else:
 				lavg = f'{" ".join(str(round(l, 1)) for l in cpu.load_avg[:2]):^7.7}'
 			# ziki: TEMP comment out LAV
-			out += f'{Mv.to(by + cy, bx + cx)}{THEME.main_fg}{lavg}{THEME.div_line(Symbol.v_line)}'
+			#out += f'{Mv.to(by + cy, bx + cx)}{THEME.main_fg}{lavg}{THEME.div_line(Symbol.v_line)}'
 
 		if CONFIG.show_uptime:
 			# TEMP add cosmetic 'print()' and comment out uptime
