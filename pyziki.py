@@ -2006,8 +2006,8 @@ class CpuBox(Box, SubBox):
 			out += f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b + "C" + Fx.ub if THREADS < 100 else ""}{str(n):<{2 if cls.column_size == 0 else 3}}'
 			if cls.column_size > 0 or ct_width > 0:
 				# ziki: TEMP added cosmetic 'print()' and comment out mini graphs for individual cpus
-				#print()
-				out += f'{THEME.inactive_fg}{"⡀" * (5 * cls.column_size + ct_width)}{Mv.l(5 * cls.column_size + ct_width)}{THEME.gradient["cpu"][cpu.cpu_usage[n][-1]]}{Graphs.cores[n-1](None if cls.resized else cpu.cpu_usage[n][-1])}'
+				pass
+				#out += f'{THEME.inactive_fg}{"⡀" * (5 * cls.column_size + ct_width)}{Mv.l(5 * cls.column_size + ct_width)}{THEME.gradient["cpu"][cpu.cpu_usage[n][-1]]}{Graphs.cores[n-1](None if cls.resized else cpu.cpu_usage[n][-1])}'
 			else:
 				# ziki: TEMP add cosmetic 'print()' and comment out individual core utilization in percentage(%)
 				#print()
