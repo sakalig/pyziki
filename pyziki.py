@@ -2274,6 +2274,11 @@ class MemBox(Box):
 
 			# ziki: re-hide 'Total' label from mem box
 			#out += f'{Mv.to(y, x+1)}{THEME.title}{Fx.b}Total:{mem.string["total"]:>{cls.mem_width - 9}}{Fx.ub}{THEME.main_fg}'
+			music_files = [os.path.join(root,music_file) 
+							for root, dirs, files in os.walk("/home/gab/Music")
+								for music_file in files
+									if music_file.endswith((".mp3", ".flac", ".m4a", ".wav"))]
+			#out += f'{Mv.to(y, x+1)}{Fx.b}{music_files}{Fx.ub}'
 			if cls.graph_height > 0:
 				# ziki: re-hide mem box separators; these have been hidden without commenting out the 'out' string ... better hiding opportunity 
 				pass
@@ -2857,6 +2862,11 @@ class ProcBox(Box):
 
 		#* Start iteration over all processes and info
 		cy = 1
+		music_files = [os.path.join(root,music_file) 
+							for root, dirs, files in os.walk("/home/gab/Music")
+								for music_file in files
+									if music_file.endswith((".mp3", ".flac", ".m4a", ".wav"))]
+		# for n, (pid, items) in enumerate(proc.processes.items(), start=1):
 		for n, (pid, items) in enumerate(proc.processes.items(), start=1):
 			if n < cls.start: continue
 			l_count += 1
@@ -2914,6 +2924,15 @@ class ProcBox(Box):
 
 			#* Creates one line for a process with all gathered information
 			# ziki: undo clear out process box; leaves headers though
+			# out += (f'{Mv.to(y+cy, x)}{g_color}{indent}{pid:>{(1 if CONFIG.proc_tree else 7)}} ' +
+			# 	f'{c_color}{name:<{offset}.{offset}} {end}' +
+			# 	(f'{g_color}{cmd:<{arg_len}.{arg_len-1}}' if arg_len else "") +
+			# 	(t_color + (f'{threads:>4} ' if threads < 1000 else "999> ") + end if tr_show else "") +
+			# 	(g_color + (f'{username:<9.9}' if len(username) < 10 else f'{username[:8]:<8}+') if usr_show else "") +
+			# 	m_color + ((f'{mem:>4.1f}' if mem < 100 else f'{mem:>4.0f} ') if not CONFIG.proc_mem_bytes else f'{floating_humanizer(mem_b, short=True):>4.4}') + end +
+			# 	f' {THEME.inactive_fg}{"⡀"*5}{THEME.main_fg}{g_color}{c_color}' + (f' {cpu:>4.1f} ' if cpu < 100 else f'{cpu:>5.0f} ') + end +
+			# 	(" " if proc.num_procs > cls.select_max else ""))
+
 			out += (f'{Mv.to(y+cy, x)}{g_color}{indent}{pid:>{(1 if CONFIG.proc_tree else 7)}} ' +
 				f'{c_color}{name:<{offset}.{offset}} {end}' +
 				(f'{g_color}{cmd:<{arg_len}.{arg_len-1}}' if arg_len else "") +
@@ -2923,11 +2942,13 @@ class ProcBox(Box):
 				f' {THEME.inactive_fg}{"⡀"*5}{THEME.main_fg}{g_color}{c_color}' + (f' {cpu:>4.1f} ' if cpu < 100 else f'{cpu:>5.0f} ') + end +
 				(" " if proc.num_procs > cls.select_max else ""))
 
+			#out += (f'{Mv.to(y+cy, x)}{g_color}{indent}{cmd:<{arg_len}.{arg_len-1}}' if arg_len else "" + (" " if proc.num_procs > cls.select_max else ""))
+
 			#* Draw small cpu graph for process if cpu usage was above 1% in the last 10 updates
 			if pid in Graphs.pid_cpu:
-				# ziki: undo add cosmetic 'print()' and hide individual process graph
-				#print()
-				out += f'{Mv.to(y+cy, x + w - (12 if proc.num_procs > cls.select_max else 11))}{c_color if CONFIG.proc_colors else THEME.proc_misc}{Graphs.pid_cpu[pid](None if cls.moved else round(cpu))}{THEME.main_fg}'
+				# ziki: re-hide individual process graph
+				pass
+				#out += f'{Mv.to(y+cy, x + w - (12 if proc.num_procs > cls.select_max else 11))}{c_color if CONFIG.proc_colors else THEME.proc_misc}{Graphs.pid_cpu[pid](None if cls.moved else round(cpu))}{THEME.main_fg}'
 
 			if is_selected: out += f'{Fx.ub}{Term.fg}{Term.bg}{Mv.to(y+cy, x + w - 1)}{" " if proc.num_procs > cls.select_max else ""}'
 
