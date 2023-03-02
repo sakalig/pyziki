@@ -5697,8 +5697,17 @@ def process_keys():
 				ProcCollector.search_filter = ""
 				Collector.collect(ProcCollector, proc_interrupt=True, redraw=True)
 			elif key == "enter":
-				pass
-				# os.system("mpv --player-operation-mode=pseudo-gui")
+				global SONG
+				if SONG:
+					# format the song path ... escape the spaces etc.
+					formated_song = SONG.replace(" ", "\ ")
+					formated_song = formated_song.replace("(", "\(")
+					formated_song = formated_song.replace(")", "\)")
+					os.system(f'mpv --player-operation-mode=pseudo-gui {formated_song}')
+					#os.system(f'mpv --player-operation-mode=pseudo-gui /home/gab/Music/Niall\ Horan\ -\ This\ Town.mp3')
+					pass
+					#os.system("mpv --player-operation-mode=pseudo-gui " + "/home/gab/Music/Niall Horan - This Town.mp3")
+				#os.system("mpv --player-operation-mode=pseudo-gui")
 				# if ProcBox.selected > 0 and ProcCollector.detailed_pid != ProcBox.selected_pid and psutil.pid_exists(ProcBox.selected_pid):
 				# 	ProcCollector.detailed = True
 				# 	ProcBox.last_selection = ProcBox.selected
