@@ -429,6 +429,15 @@ def strtobool(val: str) -> bool:
 
 #? Set up config class and load config ----------------------------------------------------------->
 
+ARTIST: str = ""
+SONG: str = ""
+ALBUM: str = ""
+
+music_files = [os.path.join(root,music_file) 
+							for root, dirs, files in os.walk("/home/gab/Music")
+								for music_file in files
+									if music_file.endswith((".mp3", ".flac", ".m4a", ".wav"))]
+
 class Config:
 	'''Holds all config variables and functions for loading from and saving to disk'''
 	keys: List[str] = ["color_theme", "update_ms", "proc_sorting", "proc_reversed", "proc_tree", "check_temp", "draw_clock", "background_update", "custom_cpu_name",
@@ -2010,6 +2019,9 @@ class CpuBox(Box, SubBox):
 			pass
 			#out += f'{Mv.to(y + hh + (1 * mid_line), x)}{Graphs.cpu["down"](None if cls.resized else cpu.cpu_lower[-1])}'
 		# ziki: re-hide cpu usage bar
+		global SONG
+		# first, clear out song HUD background ... uncover a cleaner way to refresh the CpuBox after a new selection
+		out += (f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b}{SONG}{Fx.ub}')
 		#out += (f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b}{"CPU "}{Fx.ub}{Meters.cpu(cpu.cpu_usage[0][-1])}'
 		#		f'{THEME.gradient["cpu"][cpu.cpu_usage[0][-1]]}{cpu.cpu_usage[0][-1]:>4}{THEME.main_fg}%')
 		if cpu.got_sensors:
@@ -2630,6 +2642,10 @@ class ProcBox(Box):
 
 		if old != (cls.start, cls.selected):
 			cls.moved = True
+			# ziki: refresh `Now Playing` section to reflect current song selection
+			sleep(0.5)
+			Term.refresh(force=True)
+			#CpuBox.redraw = True
 			Collector.collect(ProcCollector, proc_interrupt=True, redraw=True, only_draw=True)
 
 
@@ -2766,6 +2782,7 @@ class ProcBox(Box):
 					f'{THEME.hi_fg("r")}{THEME.title("everse")}{Fx.ub}{THEME.proc_box(Symbol.title_right)}')
 			if w > 47 + s_len:
 				if not "c" in Key.mouse: Key.mouse["c"] = [[sort_pos - 24 + i, y-1] for i in range(8)]
+				# ziki: hide `per-core` toggle label
 				pass
 				# out_misc += (f'{Mv.to(y-1, sort_pos - 25)}{THEME.proc_box(Symbol.title_left)}{Fx.b if CONFIG.proc_per_core else ""}'
 					# f'{THEME.title("per-")}{THEME.hi_fg("c")}{THEME.title("ore")}{Fx.ub}{THEME.proc_box(Symbol.title_right)}')
@@ -2863,11 +2880,7 @@ class ProcBox(Box):
 
 		#* Start iteration over all processes and info
 		cy = 1
-		music_files = [os.path.join(root,music_file) 
-							for root, dirs, files in os.walk("/home/gab/Music")
-								for music_file in files
-									if music_file.endswith((".mp3", ".flac", ".m4a", ".wav"))]
-		# for n, (pid, items) in enumerate(proc.processes.items(), start=1):
+		'''
 		for n, (pid, items) in enumerate(proc.processes.items(), start=1):
 			if n < cls.start: continue
 			l_count += 1
@@ -2934,13 +2947,13 @@ class ProcBox(Box):
 			# 	f' {THEME.inactive_fg}{"⡀"*5}{THEME.main_fg}{g_color}{c_color}' + (f' {cpu:>4.1f} ' if cpu < 100 else f'{cpu:>5.0f} ') + end +
 			# 	(" " if proc.num_procs > cls.select_max else ""))
 
-			out += (f'{Mv.to(y+cy, x)}{g_color}{indent}{pid:>{(1 if CONFIG.proc_tree else 7)}} ' +
-				f'{c_color}{name:<{offset}.{offset}} {end}' +
-				(f'{g_color}{cmd:<{arg_len}.{arg_len-1}}' if arg_len else "") +
-				(t_color + (f'{threads:>4} ' if threads < 1000 else "999> ") + end if tr_show else "") +
-				(g_color + (f'{username:<9.9}' if len(username) < 10 else f'{username[:8]:<8}+') if usr_show else "") +
-				m_color + ((f'{mem:>4.1f}' if mem < 100 else f'{mem:>4.0f} ') if not CONFIG.proc_mem_bytes else f'{floating_humanizer(mem_b, short=True):>4.4}') + end +
-				f' {THEME.inactive_fg}{"⡀"*5}{THEME.main_fg}{g_color}{c_color}' + (f' {cpu:>4.1f} ' if cpu < 100 else f'{cpu:>5.0f} ') + end +
+			out += (f'{Mv.to(y+cy, x)}{g_color}{indent}{"":>{(1 if CONFIG.proc_tree else 7)}} ' +
+				f'{c_color}{"":<{offset}.{offset}} {end}' +
+				(f'{g_color}{music_files[n]:<{arg_len}.{arg_len-1}}' if arg_len else "") +
+				(t_color + (f'{"":>4} ' if threads < 1000 else "999> ") + end if tr_show else "") +
+				(g_color + (f'{"":<9.9}' if len(username) < 10 else f'{username[:8]:<8}+') if usr_show else "") +
+				m_color + ((f'{"":>4.1f}' if mem < 100 else f'{"":>4.0f} ') if not CONFIG.proc_mem_bytes else f'{"":>4.4}') + end +
+				f' {THEME.inactive_fg}{" "*5}{THEME.main_fg}{g_color}{c_color}' + f'{"":>{(1 if CONFIG.proc_tree else 6)}}' + end +
 				(" " if proc.num_procs > cls.select_max else ""))
 
 			#out += (f'{Mv.to(y+cy, x)}{g_color}{indent}{cmd:<{arg_len}.{arg_len-1}}' if arg_len else "" + (" " if proc.num_procs > cls.select_max else ""))
@@ -2952,6 +2965,110 @@ class ProcBox(Box):
 				#out += f'{Mv.to(y+cy, x + w - (12 if proc.num_procs > cls.select_max else 11))}{c_color if CONFIG.proc_colors else THEME.proc_misc}{Graphs.pid_cpu[pid](None if cls.moved else round(cpu))}{THEME.main_fg}'
 
 			if is_selected: out += f'{Fx.ub}{Term.fg}{Term.bg}{Mv.to(y+cy, x + w - 1)}{" " if proc.num_procs > cls.select_max else ""}'
+
+			cy += 1
+			if cy == h: break
+		'''
+		music_files = [os.path.join(root,music_file) 
+							for root, dirs, files in os.walk("/home/gab/Music")
+								for music_file in files
+									if music_file.endswith((".mp3", ".flac", ".m4a", ".wav"))]
+		# for n, (pid, items) in enumerate(proc.processes.items(), start=1):
+		for n, (pid) in enumerate(music_files, start=0):
+			if n < cls.start: continue
+			l_count += 1
+			if l_count == cls.selected:
+				is_selected = True
+				cls.selected_pid = n
+			else: is_selected = False
+
+			indent, name, cmd, threads, username, mem, mem_b, cpu = ["", ("name", ""), ("cmd", ""), 0, ("username", "?"), 0.0, 0, 0.0]
+
+			if CONFIG.proc_tree:
+				arg_len = 0
+				offset = tree_len - len(f'{indent}{pid}')
+				if offset < 1: offset = 0
+				indent = f'{indent:.{tree_len - len(str(pid))}}'
+				if offset - len(name) > 12:
+					cmd = cmd.split(" ")[0].split("/")[-1]
+					if not cmd.startswith(name):
+						offset = len(name)
+						arg_len = tree_len - len(f'{indent}{pid} {name} ') + 2
+						cmd = f'({cmd[:(arg_len-4)]})'
+			else:
+				offset = prog_len - 1
+			if cpu > 1.0 or pid in Graphs.pid_cpu:
+				if pid not in Graphs.pid_cpu:
+					Graphs.pid_cpu[pid] = Graph(5, 1, None, [0])
+					cls.pid_counter[pid] = 0
+				elif cpu < 1.0:
+					cls.pid_counter[pid] += 1
+					if cls.pid_counter[pid] > 10:
+						del cls.pid_counter[pid], Graphs.pid_cpu[pid]
+				else:
+					cls.pid_counter[pid] = 0
+
+			end = f'{THEME.main_fg}{Fx.ub}' if CONFIG.proc_colors else Fx.ub
+			if cls.selected > cy: calc = cls.selected - cy
+			elif 0 < cls.selected <= cy: calc = cy - cls.selected
+			else: calc = cy
+			if CONFIG.proc_colors and not is_selected:
+				vals = []
+				for v in [int(cpu), int(mem), int(threads // 3)]:
+					if CONFIG.proc_gradient:
+						val = ((v if v <= 100 else 100) + 100) - calc * 100 // cls.select_max
+						vals += [f'{THEME.gradient["proc_color" if val < 100 else "process"][val if val < 100 else val - 100]}']
+					else:
+						vals += [f'{THEME.gradient["process"][v if v <= 100 else 100]}']
+				c_color, m_color, t_color = vals
+			else:
+				c_color = m_color = t_color = Fx.b
+			if CONFIG.proc_gradient and not is_selected:
+				g_color = f'{THEME.gradient["proc"][calc * 100 // cls.select_max]}'
+			if is_selected:
+				c_color = m_color = t_color = g_color = end = ""
+				out += f'{THEME.selected_bg}{THEME.selected_fg}{Fx.b}'
+
+			#* Creates one line for a process with all gathered information
+			# ziki: undo clear out process box; leaves headers though
+			# out += (f'{Mv.to(y+cy, x)}{g_color}{indent}{pid:>{(1 if CONFIG.proc_tree else 7)}} ' +
+			# 	f'{c_color}{name:<{offset}.{offset}} {end}' +
+			# 	(f'{g_color}{cmd:<{arg_len}.{arg_len-1}}' if arg_len else "") +
+			# 	(t_color + (f'{threads:>4} ' if threads < 1000 else "999> ") + end if tr_show else "") +
+			# 	(g_color + (f'{username:<9.9}' if len(username) < 10 else f'{username[:8]:<8}+') if usr_show else "") +
+			# 	m_color + ((f'{mem:>4.1f}' if mem < 100 else f'{mem:>4.0f} ') if not CONFIG.proc_mem_bytes else f'{floating_humanizer(mem_b, short=True):>4.4}') + end +
+			# 	f' {THEME.inactive_fg}{"⡀"*5}{THEME.main_fg}{g_color}{c_color}' + (f' {cpu:>4.1f} ' if cpu < 100 else f'{cpu:>5.0f} ') + end +
+			# 	(" " if proc.num_procs > cls.select_max else ""))
+
+			out += (f'{Mv.to(y+cy, x)}{g_color}{indent}{"":>{(1 if CONFIG.proc_tree else 7)}} ' +
+				f'{c_color}{"":<{offset}.{offset}} {end}' +
+				(f'{g_color}{music_files[n]:<{arg_len}.{arg_len-1}}' if arg_len else "") +
+				(t_color + (f'{"":>4} ' if threads < 1000 else "999> ") + end if tr_show else "") +
+				(g_color + (f'{"":<9.9}' if len(username) < 10 else f'{username[:8]:<8}+') if usr_show else "") +
+				m_color + ((f'{"":>4.1f}' if mem < 100 else f'{"":>4.0f} ') if not CONFIG.proc_mem_bytes else f'{"":>4.4}') + end +
+				f' {THEME.inactive_fg}{" "*5}{THEME.main_fg}{g_color}{c_color}' + f'{"":>{(1 if CONFIG.proc_tree else 6)}}' + end +
+				(" " if proc.num_procs > cls.select_max else ""))
+
+			#out += (f'{Mv.to(y+cy, x)}{g_color}{indent}{cmd:<{arg_len}.{arg_len-1}}' if arg_len else "" + (" " if proc.num_procs > cls.select_max else ""))
+
+			#* Draw small cpu graph for process if cpu usage was above 1% in the last 10 updates
+			if pid in Graphs.pid_cpu:
+				# ziki: re-hide individual process graph
+				pass
+				#out += f'{Mv.to(y+cy, x + w - (12 if proc.num_procs > cls.select_max else 11))}{c_color if CONFIG.proc_colors else THEME.proc_misc}{Graphs.pid_cpu[pid](None if cls.moved else round(cpu))}{THEME.main_fg}'
+
+			global SONG
+			if is_selected: 
+				#out += (f'{THEME.main_fg}{Mv.to(cls.x + cy, cls.y + cy)}{" "}')
+				out += f'{Fx.ub}{Term.fg}{Term.bg}{Mv.to(y+cy, x + w - 1)}{" " if proc.num_procs > cls.select_max else ""}'
+				out += (f'{THEME.main_fg}{Mv.to(cls.x + cy, cls.y + cy)}{Fx.b}{music_files[cls.selected_pid]}')
+				#SONG = " "
+				SONG = music_files[cls.selected_pid]
+				#out += (f'{THEME.main_fg}{Fx.b}{music_files[cls.selected_pid]}')
+			elif is_selected is False:
+				pass
+				#out += (f'{THEME.main_fg}{Mv.to(x, y + (w-10))}{"BUTTER"}')
+				#print('\033[2J\033[0;0f')
 
 			cy += 1
 			if cy == h: break
@@ -3862,7 +3979,7 @@ class ProcCollector(Collector):
 
 				n += 1
 
-			cls.num_procs = n
+			cls.num_procs = len(music_files)
 			cls.processes = out.copy()
 
 		if cls.detailed:
