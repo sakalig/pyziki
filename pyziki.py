@@ -5697,28 +5697,30 @@ def process_keys():
 				ProcCollector.search_filter = ""
 				Collector.collect(ProcCollector, proc_interrupt=True, redraw=True)
 			elif key == "enter":
-				if ProcBox.selected > 0 and ProcCollector.detailed_pid != ProcBox.selected_pid and psutil.pid_exists(ProcBox.selected_pid):
-					ProcCollector.detailed = True
-					ProcBox.last_selection = ProcBox.selected
-					ProcBox.selected = 0
-					ProcCollector.detailed_pid = ProcBox.selected_pid
-					ProcBox.resized = True
-					Collector.proc_counter = 1
-				elif ProcCollector.detailed:
-					ProcBox.selected = ProcBox.last_selection
-					ProcBox.last_selection = 0
-					ProcCollector.detailed = False
-					ProcCollector.detailed_pid = None
-					ProcBox.resized = True
-					Collector.proc_counter = 1
-				else:
-					continue
-				ProcCollector.details = {}
-				ProcCollector.details_cpu = []
-				ProcCollector.details_mem = []
-				Graphs.detailed_cpu = NotImplemented
-				Graphs.detailed_mem = NotImplemented
-				Collector.collect(ProcCollector, proc_interrupt=True, redraw=True)
+				pass
+				# os.system("mpv --player-operation-mode=pseudo-gui")
+				# if ProcBox.selected > 0 and ProcCollector.detailed_pid != ProcBox.selected_pid and psutil.pid_exists(ProcBox.selected_pid):
+				# 	ProcCollector.detailed = True
+				# 	ProcBox.last_selection = ProcBox.selected
+				# 	ProcBox.selected = 0
+				# 	ProcCollector.detailed_pid = ProcBox.selected_pid
+				# 	ProcBox.resized = True
+				# 	Collector.proc_counter = 1
+				# elif ProcCollector.detailed:
+				# 	ProcBox.selected = ProcBox.last_selection
+				# 	ProcBox.last_selection = 0
+				# 	ProcCollector.detailed = False
+				# 	ProcCollector.detailed_pid = None
+				# 	ProcBox.resized = True
+				# 	Collector.proc_counter = 1
+				# else:
+				# 	continue
+				# ProcCollector.details = {}
+				# ProcCollector.details_cpu = []
+				# ProcCollector.details_mem = []
+				# Graphs.detailed_cpu = NotImplemented
+				# Graphs.detailed_mem = NotImplemented
+				# Collector.collect(ProcCollector, proc_interrupt=True, redraw=True)
 			elif key in ["up", "down", "mouse_scroll_up", "mouse_scroll_down", "page_up", "page_down", "home", "end", "mouse_click", "mouse_unselect", "j", "k"]:
 				ProcBox.selector(key, mouse_pos)
 
