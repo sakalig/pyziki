@@ -5700,11 +5700,8 @@ def process_keys():
 				global SONG
 				if SONG:
 					# format the song path ... escape the spaces etc.
-					formated_song = SONG.replace(" ", "\ ")
-					formated_song = formated_song.replace("(", "\(")
-					formated_song = formated_song.replace(")", "\)")
+					formated_song = SONG.replace(" ", "\ ").replace("(", "\(").replace(")", "\)")
 					os.system(f'mpv --player-operation-mode=pseudo-gui {formated_song}')
-					#os.system(f'mpv --player-operation-mode=pseudo-gui /home/gab/Music/Niall\ Horan\ -\ This\ Town.mp3')
 					pass
 					#os.system("mpv --player-operation-mode=pseudo-gui " + "/home/gab/Music/Niall Horan - This Town.mp3")
 				#os.system("mpv --player-operation-mode=pseudo-gui")
