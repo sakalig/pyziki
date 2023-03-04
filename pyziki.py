@@ -30,6 +30,10 @@ from random import randint
 from shutil import which
 from typing import List, Dict, Tuple, Union, Any, Iterable
 
+# ziki: import media playback functionality
+from ffpyplayer.player import MediaPlayer
+from ffpyplayer.player.core import VideoState
+
 errors: List[str] = []
 try: import fcntl, termios, tty, pwd
 except Exception as e: errors.append(f'{e}')
@@ -2834,7 +2838,9 @@ class ProcBox(Box):
 			selected = selected.split(" ")[0].capitalize()
 			if CONFIG.proc_mem_bytes: label = label.replace("Mem%", "MemB")
 			label = label.replace(selected, f'{Fx.u}{selected}{Fx.uu}')
-			out_misc += label
+			# ziki: hide initial labels
+			# out_misc += label
+			out_misc += ""
 
 			Draw.buffer("proc_misc", out_misc, only_save=True)
 
@@ -5701,7 +5707,23 @@ def process_keys():
 				if SONG:
 					# format the song path ... escape the spaces etc.
 					formated_song = SONG.replace(" ", "\ ").replace("(", "\(").replace(")", "\)")
+					'''
+					player = MediaPlayer(SONG)
+					val = ''
+
+					while val != 'eof':
+						val = player.get_pts()
+
+					print("Played")
+					'''
+					#sound = AudioSegment.from_mp3(SONG)
+					#play(sound)
+
+					#stream = ffmpeg.input(formated_song)
+					#ffmpeg.run(stream)
+
 					os.system(f'mpv --player-operation-mode=pseudo-gui {formated_song}')
+					#os.system(f'ffplay {formated_song}')
 					pass
 					#os.system("mpv --player-operation-mode=pseudo-gui " + "/home/gab/Music/Niall Horan - This Town.mp3")
 				#os.system("mpv --player-operation-mode=pseudo-gui")
