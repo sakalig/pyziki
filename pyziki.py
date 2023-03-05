@@ -2031,6 +2031,8 @@ class CpuBox(Box, SubBox):
 		global SONG
 		# first, clear out song HUD background ... uncover a cleaner way to refresh the CpuBox after a new selection
 		out += (f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b}{SONG}{Fx.ub}')
+		out += (f'{THEME.main_fg}{Mv.to(by + cy + 1, bx + cx)}{Fx.b}{"ARTIST"}{Fx.ub}')
+		out += (f'{THEME.main_fg}{Mv.to(by + cy + 2, bx + cx)}{Fx.b}{"ALBUM"}{Fx.ub}')
 		#out += (f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b}{"CPU "}{Fx.ub}{Meters.cpu(cpu.cpu_usage[0][-1])}'
 		#		f'{THEME.gradient["cpu"][cpu.cpu_usage[0][-1]]}{cpu.cpu_usage[0][-1]:>4}{THEME.main_fg}%')
 		if cpu.got_sensors:
