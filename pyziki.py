@@ -3075,7 +3075,7 @@ class ProcBox(Box):
 			if is_selected: 
 				#out += (f'{THEME.main_fg}{Mv.to(cls.x + cy, cls.y + cy)}{" "}')
 				out += f'{Fx.ub}{Term.fg}{Term.bg}{Mv.to(y+cy, x + w - 1)}{" " if proc.num_procs > cls.select_max else ""}'
-				out += (f'{THEME.main_fg}{Mv.to(cls.x + cy, cls.y + cy)}{Fx.b}{music_files[cls.selected_pid]}')
+				#out += (f'{THEME.main_fg}{Mv.to(cls.x + cy, cls.y + cy)}{Fx.b}{music_files[cls.selected_pid]}')
 				#SONG = " "
 				SONG = music_files[cls.selected_pid]
 				#out += (f'{THEME.main_fg}{Fx.b}{music_files[cls.selected_pid]}')
