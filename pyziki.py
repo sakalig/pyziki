@@ -1894,7 +1894,8 @@ class CpuBox(Box, SubBox):
 		if not "M" in Key.mouse:
 			Key.mouse["M"] = [[cls.x + 10 + i, cls.y] for i in range(6)]
 		return (f'{create_box(box=cls, line_color=THEME.cpu_box)}'
-		f'{Mv.to(cls.y, cls.x + 10)}{THEME.cpu_box(Symbol.title_left)}{Fx.b}{THEME.hi_fg("M")}{THEME.title("enu")}{Fx.ub}{THEME.cpu_box(Symbol.title_right)}'
+		# ziki: hide `Menu` label
+		# f'{Mv.to(cls.y, cls.x + 10)}{THEME.cpu_box(Symbol.title_left)}{Fx.b}{THEME.hi_fg("M")}{THEME.title("enu")}{Fx.ub}{THEME.cpu_box(Symbol.title_right)}'
 		f'{create_box(x=cls.box_x, y=cls.box_y, width=cls.box_width, height=cls.box_height, line_color=THEME.div_line, fill=False, title=CPU_NAME[:cls.box_width - 14] if not CONFIG.custom_cpu_name else CONFIG.custom_cpu_name[:cls.box_width - 14])}')
 
 	@classmethod
@@ -5453,7 +5454,7 @@ def create_box(x: int = 0, y: int = 0, width: int = 0, height: int = 0, title: s
 
 	#* Draw titles if enabled
 	if title:
-		# ziki: hide PyZiki superscript label
+		# ziki: hide PyZiki numeric superscript label
 		# numbered: str = "" if not num else f'{THEME.hi_fg(SUPERSCRIPT[num])}'
 		numbered: str = "" if not num else ""
 		out += f'{Mv.to(y, x + 2)}{Symbol.title_left}{Fx.b}{numbered}{title_color}{title}{Fx.ub}{line_color}{Symbol.title_right}'
