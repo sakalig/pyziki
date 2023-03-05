@@ -2523,7 +2523,8 @@ class NetBox(Box, SubBox):
 		cls.redraw = cls.resized = False
 
 class ProcBox(Box):
-	name = "proc"
+	# ziki: change section name from `proc` to `Songs`
+	name = "Songs"
 	num = 4
 	height_p = 68
 	width_p = 55
@@ -2759,7 +2760,9 @@ class ProcBox(Box):
 					cls.current_h = cls.height
 					y, h = cls.y + 1, cls.height - 2
 					out_misc += (f'{Mv.to(y-1, x-1)}{THEME.proc_box}{Symbol.left_up}{Symbol.h_line*w}{Symbol.right_up}'
-						f'{Mv.to(y-1, x+1)}{THEME.proc_box(Symbol.title_left)}{Fx.b}{THEME.hi_fg(SUPERSCRIPT[cls.num])}{THEME.title(cls.name)}{Fx.ub}{THEME.proc_box(Symbol.title_right)}'
+						# ziki: hide superscript numerical label for `Songs` section
+						# f'{Mv.to(y-1, x+1)}{THEME.proc_box(Symbol.title_left)}{Fx.b}{THEME.hi_fg(SUPERSCRIPT[cls.num])}{THEME.title(cls.name)}{Fx.ub}{THEME.proc_box(Symbol.title_right)}'
+						f'{Mv.to(y-1, x+1)}{THEME.proc_box(Symbol.title_left)}{Fx.b}{THEME.title(cls.name)}{Fx.ub}{THEME.proc_box(Symbol.title_right)}'
 						f'{Mv.to(y+7, x-1)}{THEME.proc_box(Symbol.v_line)}{Mv.r(w)}{THEME.proc_box(Symbol.v_line)}')
 				cls.select_max = cls.height - 3
 
