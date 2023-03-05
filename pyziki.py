@@ -1965,7 +1965,8 @@ class CpuBox(Box, SubBox):
 		if cls.resized or cls.redraw:
 			if not "m" in Key.mouse:
 				Key.mouse["m"] = [[cls.x + 16 + i, cls.y] for i in range(12)]
-			out_misc += f'{Mv.to(cls.y, cls.x + 16)}{THEME.cpu_box(Symbol.title_left)}{Fx.b}{THEME.hi_fg("m")}{THEME.title}ode:{Box.view_mode}{Fx.ub}{THEME.cpu_box(Symbol.title_right)}'
+			# ziki: hide `mode` label
+			# out_misc += f'{Mv.to(cls.y, cls.x + 16)}{THEME.cpu_box(Symbol.title_left)}{Fx.b}{THEME.hi_fg("m")}{THEME.title}ode:{Box.view_mode}{Fx.ub}{THEME.cpu_box(Symbol.title_right)}'
 			Graphs.cpu["up"] = Graph(w - bw - 3, (h if CONFIG.cpu_single_graph else hh), THEME.gradient["cpu"], cpu.cpu_upper, round_up_low=True)
 			if not CONFIG.cpu_single_graph:
 				Graphs.cpu["down"] = Graph(w - bw - 3, hh2, THEME.gradient["cpu"], cpu.cpu_lower, invert=CONFIG.cpu_invert_lower, round_up_low=True)
