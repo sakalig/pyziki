@@ -1825,7 +1825,7 @@ class SubBox:
 	column_size: int = 0
 
 class CpuBox(Box, SubBox):
-	name = "cpu"
+	name = "PyZiki"
 	num = 1
 	x = 1
 	y = 1
@@ -5453,7 +5453,9 @@ def create_box(x: int = 0, y: int = 0, width: int = 0, height: int = 0, title: s
 
 	#* Draw titles if enabled
 	if title:
-		numbered: str = "" if not num else f'{THEME.hi_fg(SUPERSCRIPT[num])}'
+		# ziki: hide PyZiki superscript label
+		# numbered: str = "" if not num else f'{THEME.hi_fg(SUPERSCRIPT[num])}'
+		numbered: str = "" if not num else ""
 		out += f'{Mv.to(y, x + 2)}{Symbol.title_left}{Fx.b}{numbered}{title_color}{title}{Fx.ub}{line_color}{Symbol.title_right}'
 	if title2:
 		out += f'{Mv.to(hlines[1], x + 2)}{Symbol.title_left}{title_color}{Fx.b}{title2}{Fx.ub}{line_color}{Symbol.title_right}'
