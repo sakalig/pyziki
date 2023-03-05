@@ -68,8 +68,8 @@ args.add_argument("-v", "--version",	action="store_true", 			help = "show versio
 args.add_argument("--debug",			action="store_true", 			help = "start with loglevel set to DEBUG overriding value set in config")
 stdargs = args.parse_args()
 
-# ziki: re-undo force pyziki to start without net section
-stdargs.boxes = "cpu mem proc"
+# ziki: re-undo force pyziki to start without net, mem section(s)
+stdargs.boxes = "cpu proc"
 
 if stdargs.version:
 	print(f'bpytop version: {VERSION}\n'
