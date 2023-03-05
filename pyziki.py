@@ -2778,8 +2778,10 @@ class ProcBox(Box):
 
 			if w > 29 + s_len:
 				if not "e" in Key.mouse: Key.mouse["e"] = [[sort_pos - 5 + i, y-1] for i in range(4)]
-				out_misc += (f'{Mv.to(y-1, sort_pos - 6)}{THEME.proc_box(Symbol.title_left)}{Fx.b if CONFIG.proc_tree else ""}'
-					f'{THEME.title("tre")}{THEME.hi_fg("e")}{Fx.ub}{THEME.proc_box(Symbol.title_right)}')
+				pass
+				# ziki: hide `tree` label
+				# out_misc += (f'{Mv.to(y-1, sort_pos - 6)}{THEME.proc_box(Symbol.title_left)}{Fx.b if CONFIG.proc_tree else ""}'
+					# f'{THEME.title("tre")}{THEME.hi_fg("e")}{Fx.ub}{THEME.proc_box(Symbol.title_right)}')
 			if w > 37 + s_len:
 				if not "r" in Key.mouse: Key.mouse["r"] = [[sort_pos - 14 + i, y-1] for i in range(7)]
 				pass
