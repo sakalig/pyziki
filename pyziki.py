@@ -2817,17 +2817,23 @@ class ProcBox(Box):
 			out_misc += (f'{Mv.to(y+h, x + 1)}{THEME.proc_box}{Symbol.h_line*(w-4)}'
 					f'{Mv.to(y+h, x+1)}{THEME.proc_box(Symbol.title_left)}{main}{Symbol.up} {Fx.b}{THEME.main_fg("select")} {Fx.ub}'
 					f'{THEME.inactive_fg if cls.selected == cls.select_max else THEME.main_fg}{Symbol.down}{THEME.proc_box(Symbol.title_right)}'
-					f'{THEME.proc_box(Symbol.title_left)}{title}{Fx.b}info {Fx.ub}{main}{Symbol.enter}{THEME.proc_box(Symbol.title_right)}')
+					f'{THEME.proc_box(Symbol.title_left)}{title}{Fx.b}play {Fx.ub}{main}{Symbol.enter}{THEME.proc_box(Symbol.title_right)}')
 			if not "enter" in Key.mouse: Key.mouse["enter"] = [[x + 14 + i, y+h] for i in range(6)]
 			if w - len(loc_string) > 34:
 				if not "T" in Key.mouse: Key.mouse["T"] = [[x + 22 + i, y+h] for i in range(9)]
-				out_misc += f'{THEME.proc_box(Symbol.title_left)}{Fx.b}{hi}T{title}erminate{Fx.ub}{THEME.proc_box(Symbol.title_right)}'
+				# ziki: hide `Terminate` label
+				pass
+				# out_misc += f'{THEME.proc_box(Symbol.title_left)}{Fx.b}{hi}T{title}erminate{Fx.ub}{THEME.proc_box(Symbol.title_right)}'
 			if w - len(loc_string) > 40:
 				if not "K" in Key.mouse: Key.mouse["K"] = [[x + 33 + i, y+h] for i in range(4)]
-				out_misc += f'{THEME.proc_box(Symbol.title_left)}{Fx.b}{hi}K{title}ill{Fx.ub}{THEME.proc_box(Symbol.title_right)}'
+				# ziki: hide `Kill` label
+				pass
+				# out_misc += f'{THEME.proc_box(Symbol.title_left)}{Fx.b}{hi}K{title}ill{Fx.ub}{THEME.proc_box(Symbol.title_right)}'
 			if w - len(loc_string) > 51:
 				if not "I" in Key.mouse: Key.mouse["I"] = [[x + 39 + i, y+h] for i in range(9)]
-				out_misc += f'{THEME.proc_box(Symbol.title_left)}{Fx.b}{hi}I{title}nterrupt{Fx.ub}{THEME.proc_box(Symbol.title_right)}'
+				# ziki: hide `Interrupt` label
+				pass
+				# out_misc += f'{THEME.proc_box(Symbol.title_left)}{Fx.b}{hi}I{title}nterrupt{Fx.ub}{THEME.proc_box(Symbol.title_right)}'
 			if CONFIG.proc_tree and w - len(loc_string) > 65:
 				if not " " in Key.mouse: Key.mouse[" "] = [[x + 50 + i, y+h] for i in range(12)]
 				out_misc += f'{THEME.proc_box(Symbol.title_left)}{Fx.b}{hi}spc {title}collapse{Fx.ub}{THEME.proc_box(Symbol.title_right)}'
