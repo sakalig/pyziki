@@ -30,6 +30,9 @@ from random import randint
 from shutil import which
 from typing import List, Dict, Tuple, Union, Any, Iterable
 
+
+from pathlib import Path
+
 # ziki: import media playback functionality
 from ffpyplayer.player import MediaPlayer
 from ffpyplayer.player.core import VideoState
@@ -2983,8 +2986,9 @@ class ProcBox(Box):
 			cy += 1
 			if cy == h: break
 		'''
+		home_path = str(Path.home()) + "/Music"
 		music_files = [os.path.join(root,music_file) 
-							for root, dirs, files in os.walk("/home/gab/Music")
+							for root, dirs, files in os.walk(f'{home_path}')
 								for music_file in files
 									if music_file.endswith((".mp3", ".flac", ".m4a", ".wav"))]
 		# for n, (pid, items) in enumerate(proc.processes.items(), start=1):
