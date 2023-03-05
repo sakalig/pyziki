@@ -2796,9 +2796,10 @@ class ProcBox(Box):
 				if not "delete" in Key.mouse: Key.mouse["delete"] = [[x+12 + len(proc.search_filter[-10:]) + i, y-1] for i in range(3)]
 			elif "delete" in Key.mouse:
 				del Key.mouse["delete"]
-			out_misc += (f'{Mv.to(y-1, x + 8)}{THEME.proc_box(Symbol.title_left)}{Fx.b if cls.filtering or proc.search_filter else ""}{THEME.hi_fg("F" if cls.filtering and proc.case_sensitive else "f")}{THEME.title}' +
-				("ilter" if not proc.search_filter and not cls.filtering else f' {proc.search_filter[-(10 if w < 83 else w - 74):]}{(Fx.bl + "█" + Fx.ubl) if cls.filtering else THEME.hi_fg(" del")}') +
-				f'{THEME.proc_box(Symbol.title_right)}')
+			# ziki: hide filter label
+			# out_misc += (f'{Mv.to(y-1, x + 8)}{THEME.proc_box(Symbol.title_left)}{Fx.b if cls.filtering or proc.search_filter else ""}{THEME.hi_fg("F" if cls.filtering and proc.case_sensitive else "f")}{THEME.title}' +
+				# ("ilter" if not proc.search_filter and not cls.filtering else f' {proc.search_filter[-(10 if w < 83 else w - 74):]}{(Fx.bl + "█" + Fx.ubl) if cls.filtering else THEME.hi_fg(" del")}') +
+				# f'{THEME.proc_box(Symbol.title_right)}')
 
 			main = THEME.inactive_fg if cls.selected == 0 else THEME.main_fg
 			hi = THEME.inactive_fg if cls.selected == 0 else THEME.hi_fg
@@ -2838,7 +2839,7 @@ class ProcBox(Box):
 			selected = selected.split(" ")[0].capitalize()
 			if CONFIG.proc_mem_bytes: label = label.replace("Mem%", "MemB")
 			label = label.replace(selected, f'{Fx.u}{selected}{Fx.uu}')
-			# ziki: hide initial labels
+			# ziki: hide initial process labels
 			# out_misc += label
 			out_misc += ""
 
