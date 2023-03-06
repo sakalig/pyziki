@@ -4,6 +4,9 @@ A terminal music player implemented in python
 Version 0.5.0
 ![Current UI](screenshots/screenshot_1.png)
 
+Version 0.6.0
+![Current UI](screenshots/screenshot_2.png)
+
 ### Dependencies
 + ffplayer   4.4.0
 + psutil     5.9.4
