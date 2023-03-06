@@ -2996,8 +2996,8 @@ class ProcBox(Box):
 			cy += 1
 			if cy == h: break
 		'''
-		home_path = str(Path.home()) + "/Music/"
-		music_files = [os.path.join("",music_file) 
+		home_path = str(Path.home()) + "/Music"
+		music_files = [os.path.join(root,music_file) 
 							for root, dirs, files in os.walk(f'{home_path}')
 								for music_file in files
 									if music_file.endswith((".mp3", ".flac", ".m4a", ".wav"))]
@@ -3091,7 +3091,7 @@ class ProcBox(Box):
 				out += f'{Fx.ub}{Term.fg}{Term.bg}{Mv.to(y+cy, x + w - 1)}{" " if proc.num_procs > cls.select_max else ""}'
 				#out += (f'{THEME.main_fg}{Mv.to(cls.x + cy, cls.y + cy)}{Fx.b}{music_files[cls.selected_pid]}')
 				#SONG = " "
-				SONG = home_path + music_files[cls.selected_pid]
+				SONG = music_files[cls.selected_pid]
 				#out += (f'{THEME.main_fg}{Fx.b}{music_files[cls.selected_pid]}')
 			elif is_selected is False:
 				pass
