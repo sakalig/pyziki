@@ -61,7 +61,7 @@ if errors:
 		print("\nInstall required modules!\n")
 	raise SystemExit(1)
 
-VERSION: str = "0.1.0"
+VERSION: str = "0.5.0"
 
 #? Argument parser ------------------------------------------------------------------------------->
 args = argparse.ArgumentParser()
@@ -92,7 +92,11 @@ BANNER_SRC: List[Tuple[str, str, str]] = [
 ("#c27b00", "#008ca8", "██╔═══╝   ╚██╔╝   ███╔╝  ██║██╔═██╗ ██║"),
 ("#a86b00", "#006e85", "██║        ██║   ███████╗██║██║  ██╗██║"),
 ("#000000", "#000000", "╚═╝        ╚═╝   ╚══════╝╚═╝╚═╝  ╚═╝╚═╝"),
-]                                       
+]
+
+# BANNER_ZIKI: str = "██████╗ ██╗   ██╗███████╗██╗██╗  ██╗██╗\n"+"██╔══██╗╚██╗ ██╔╝╚══███╔╝██║██║ ██╔╝██║\n"+"██████╔╝ ╚████╔╝   ███╔╝ ██║█████╔╝ ██║\n"+"██╔═══╝   ╚██╔╝   ███╔╝  ██║██╔═██╗ ██║\n"+"██║        ██║   ███████╗██║██║  ██╗██║\n"+"╚═╝        ╚═╝   ╚══════╝╚═╝╚═╝  ╚═╝╚═╝"
+BANNER_ZIKI: str = "\n██████╗ ██╗   ██╗███████╗██╗██╗  ██╗██╗\n" + "██╔══██╗╚██╗ ██╔╝╚══███╔╝██║██║ ██╔╝██║\n" + "██████╔╝ ╚████╔╝   ███╔╝ ██║█████╔╝ ██║\n" + "██╔═══╝   ╚██╔╝   ███╔╝  ██║██╔═██╗ ██║\n" + "██║        ██║   ███████╗██║██║  ██╗██║\n" + "╚═╝        ╚═╝   ╚══════╝╚═╝╚═╝  ╚═╝╚═╝"
+BANNER_ZIKI_MUSIC_PLAYER: str = "\n██████╗ ██╗   ██╗███████╗██╗██╗  ██╗██╗    ███╗   ███╗██╗   ██╗███████╗██╗ ██████╗    ██████╗ ██╗      █████╗ ██╗   ██╗███████╗██████╗\n" + "██╔══██╗╚██╗ ██╔╝╚══███╔╝██║██║ ██╔╝██║    ████╗ ████║██║   ██║██╔════╝██║██╔════╝    ██╔══██╗██║     ██╔══██╗╚██╗ ██╔╝██╔════╝██╔══██╗\n" + "██████╔╝ ╚████╔╝   ███╔╝ ██║█████╔╝ ██║    ██╔████╔██║██║   ██║███████╗██║██║         ██████╔╝██║     ███████║ ╚████╔╝ █████╗  ██████╔╝\n" + "██╔═══╝   ╚██╔╝   ███╔╝  ██║██╔═██╗ ██║    ██║╚██╔╝██║██║   ██║╚════██║██║██║         ██╔═══╝ ██║     ██╔══██║  ╚██╔╝  ██╔══╝  ██╔══██╗\n" + "██║        ██║   ███████╗██║██║  ██╗██║    ██║ ╚═╝ ██║╚██████╔╝███████║██║╚██████╗    ██║     ███████╗██║  ██║   ██║   ███████╗██║  ██║\n" + "╚═╝        ╚═╝   ╚══════╝╚═╝╚═╝  ╚═╝╚═╝    ╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚═╝ ╚═════╝    ╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝"
 
 #*?This is the template used to create the config file
 DEFAULT_CONF: Template = Template(f'#? Config file for bpytop v. {VERSION}' + '''
@@ -2030,9 +2034,11 @@ class CpuBox(Box, SubBox):
 		# ziki: re-hide cpu usage bar
 		global SONG
 		# first, clear out song HUD background ... uncover a cleaner way to refresh the CpuBox after a new selection
-		out += (f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b}{SONG}{Fx.ub}')
-		out += (f'{THEME.main_fg}{Mv.to(by + cy + 1, bx + cx)}{Fx.b}{"ARTIST"}{Fx.ub}')
-		out += (f'{THEME.main_fg}{Mv.to(by + cy + 2, bx + cx)}{Fx.b}{"ALBUM"}{Fx.ub}')
+		# out += (f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b}{SONG}{Fx.ub}')
+		out += (f'{THEME.main_fg}{Mv.to(by + cy + 1, bx + cx)}{Fx.b}{"Tale of the Tongues"}{Fx.ub}')
+		out += (f'{THEME.main_fg}{Mv.to(by + cy + 3, bx + cx)}{Fx.b}{"Malukah"}{Fx.ub}')
+		out += (f'{THEME.main_fg}{Mv.to(by + cy + 5, bx + cx)}{Fx.b}{"Skyrim Covers"}{Fx.ub}')
+		out += (f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b}{BANNER_ZIKI_MUSIC_PLAYER}{Fx.ub}')
 		#out += (f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b}{"CPU "}{Fx.ub}{Meters.cpu(cpu.cpu_usage[0][-1])}'
 		#		f'{THEME.gradient["cpu"][cpu.cpu_usage[0][-1]]}{cpu.cpu_usage[0][-1]:>4}{THEME.main_fg}%')
 		if cpu.got_sensors:
@@ -2997,7 +3003,7 @@ class ProcBox(Box):
 			if cy == h: break
 		'''
 		home_path = str(Path.home()) + "/Music"
-		music_files = [os.path.join(root,music_file) 
+		music_files = [os.path.join("",music_file) 
 							for root, dirs, files in os.walk(f'{home_path}')
 								for music_file in files
 									if music_file.endswith((".mp3", ".flac", ".m4a", ".wav"))]
