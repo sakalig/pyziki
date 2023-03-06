@@ -12,6 +12,17 @@ Version 0.5.0
 
 (... and of course `pip`)
 
+## TO-DO
+- [ ] Seek bar
+- [ ] Shuffle support
+- [ ] Repeat support
+- [ ] Installation/Execution guide
+- [ ] Album art support
+- [ ] Dynamic visualizer
+- [ ] File system navigation
+
+---
+
 This particular version has been implemented via Python 3.10. Testing is ongoing.
 
 PyZiki was inspired by the elegance that is bpyTOP. Please check the project out:
