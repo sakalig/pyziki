@@ -106,6 +106,8 @@ BANNER_ZIKI_0: str = f"\n{b_tab*22}██████╗ ██╗   ██╗�
 BANNER_NOTE_2: str = f"\n{b_tab*30}                    ...\n{b_tab*30}                    ...\n{b_tab*30}                    ...\n{b_tab*30}                    ...\n{b_tab*30}                    ...\n{b_tab*30}                    ...\n{b_tab*30}                    ...\n{b_tab*30}                    ...\n{b_tab*30}                    ...\n{b_tab*30}                    ...\n{b_tab*30}                    ...\n{b_tab*30}                    ...\n{b_tab*30}                    ...\n{b_tab*30}                    ...\n{b_tab*30}              .........\n{b_tab*30}           ............\n{b_tab*30}        ...............\n{b_tab*30}       ................\n{b_tab*30}       ................\n{b_tab*30}       ................\n{b_tab*30}         .............\n{b_tab*30}           ........."
 BANNER_NOTE_3: str = f"\n{b_tab*34}                    ...\n{b_tab*34}                    ...\n{b_tab*34}                    ...\n{b_tab*34}                    ...\n{b_tab*34}                    ...\n{b_tab*34}                    ...\n{b_tab*34}                    ...\n{b_tab*34}                    ...\n{b_tab*34}                    ...\n{b_tab*34}                    ...\n{b_tab*34}                    ...\n{b_tab*34}                    ...\n{b_tab*34}                    ...\n{b_tab*34}                    ...\n{b_tab*34}              .........\n{b_tab*34}           ............\n{b_tab*34}        ...............\n{b_tab*34}       ................\n{b_tab*34}       ................\n{b_tab*34}       ................\n{b_tab*34}         .............\n{b_tab*34}           ........."
 
+MUSIC_NOTE_0: str = f"        ..\n" + "        ...\n" + "        .. .\n" + "        .. ..\n" + "        ..\n" + "        ..\n" + "      ....\n" + "   .......\n" + "..........\n" + " .........\n" + "    ......"
+
 #*?This is the template used to create the config file
 DEFAULT_CONF: Template = Template(f'#? Config file for bpytop v. {VERSION}' + '''
 
@@ -1470,12 +1472,19 @@ class Symbol:
 	# 3.0 : " ", 3.1 : "𝄿", 3.2 : " ", 3.3 : "𝅁", 3.4 : " ",
 	# 4.0 : " ", 4.1 : "𝆕", 4.2 : " ", 4.3 : "𝆹𝅥𝅯", 4.4 : " "
 	# }
+	# graph_up: Dict[float, str] = {
+	# 0.0 : " ", 0.1 : "𝅗𝅥", 0.2 : "𝅘𝅥", 0.3 : "𝅘𝅥𝅮", 0.4 : "𝅘𝅥𝅯",
+	# 1.0 : "𝅘𝅥𝅰", 1.1 : "𝅘𝅥𝅱", 1.2 : "𝅘𝅥𝅲", 1.3 : "♭", 1.4 : "♮",
+	# 2.0 : "♯", 2.1 : "𝆺𝅥𝅯", 2.2 : "𝆺𝅥𝅮", 2.3 : "𝅘𝅥𝅲", 2.4 : "𝅘𝅥𝅯",
+	# 3.0 : "𝄾", 3.1 : "𝄿", 3.2 : "𝅀", 3.3 : "𝅁", 3.4 : "𝅂",
+	# 4.0 : "𝆔", 4.1 : "𝆕", 4.2 : "𝆺𝅥𝅮", 4.3 : "𝆹𝅥𝅯", 4.4 : "𝆺𝅥𝅯"
+	# }
 	graph_up: Dict[float, str] = {
-	0.0 : " ", 0.1 : "𝅗𝅥", 0.2 : "𝅘𝅥", 0.3 : "𝅘𝅥𝅮", 0.4 : "𝅘𝅥𝅯",
-	1.0 : "𝅘𝅥𝅰", 1.1 : "𝅘𝅥𝅱", 1.2 : "𝅘𝅥𝅲", 1.3 : "♭", 1.4 : "♮",
-	2.0 : "♯", 2.1 : "𝆺𝅥𝅯", 2.2 : "𝆺𝅥𝅮", 2.3 : "𝅘𝅥𝅲", 2.4 : "𝅘𝅥𝅯",
-	3.0 : "𝄾", 3.1 : "𝄿", 3.2 : "𝅀", 3.3 : "𝅁", 3.4 : "𝅂",
-	4.0 : "𝆔", 4.1 : "𝆕", 4.2 : "𝆺𝅥𝅮", 4.3 : "𝆹𝅥𝅯", 4.4 : "𝆺𝅥𝅯"
+	0.0 : " ", 0.1 : f"{MUSIC_NOTE_0}", 0.2 : f"{MUSIC_NOTE_0}", 0.3 : f"{MUSIC_NOTE_0}", 0.4 : f"{MUSIC_NOTE_0}",
+	1.0 : f"{MUSIC_NOTE_0}", 1.1 : f"{MUSIC_NOTE_0}", 1.2 : f"{MUSIC_NOTE_0}", 1.3 : f"{MUSIC_NOTE_0}", 1.4 : f"{MUSIC_NOTE_0}",
+	2.0 : f"{MUSIC_NOTE_0}", 2.1 : f"{MUSIC_NOTE_0}", 2.2 : f"{MUSIC_NOTE_0}", 2.3 : f"{MUSIC_NOTE_0}", 2.4 : f"{MUSIC_NOTE_0}",
+	3.0 : f"{MUSIC_NOTE_0}", 3.1 : f"{MUSIC_NOTE_0}", 3.2 : f"{MUSIC_NOTE_0}", 3.3 : f"{MUSIC_NOTE_0}", 3.4 : f"{MUSIC_NOTE_0}",
+	4.0 : f"{MUSIC_NOTE_0}", 4.1 : f"{MUSIC_NOTE_0}", 4.2 : f"{MUSIC_NOTE_0}", 4.3 : f"{MUSIC_NOTE_0}", 4.4 : f"{MUSIC_NOTE_0}"
 	}
 	graph_up_small = graph_up.copy()
 	graph_up_small[0.0] = "\033[1C"
@@ -2048,11 +2057,11 @@ class CpuBox(Box, SubBox):
 		out += (f'{THEME.main_fg}{Mv.to(by + cy + 5, bx + cx)}{Fx.b}{"Skyrim Covers"}{Fx.ub}')
 		# out += (f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b}{BANNER_ZIKI_MUSIC_PLAYER}{Fx.ub}')
 		out += (f'{THEME.main_fg}{Mv.to(by + cy - 7, bx + cx)}{Fx.b}{BANNER_GUITAR}{Fx.ub}')
-		out += (f'{THEME.main_fg}{Mv.to(by + cy - 7, bx + cx)}{Fx.b}{BANNER_NOTE_0}{Fx.ub}')
-		out += (f'{THEME.main_fg}{Mv.to(by + cy - 7, bx + cx)}{Fx.b}{BANNER_NOTE_1}{Fx.ub}')
-		out += (f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b}{BANNER_ZIKI_0}{Fx.ub}')
-		out += (f'{THEME.main_fg}{Mv.to(by + cy - 7, bx + cx)}{Fx.b}{BANNER_NOTE_2}{Fx.ub}')
-		out += (f'{THEME.main_fg}{Mv.to(by + cy - 7, bx + cx)}{Fx.b}{BANNER_NOTE_3}{Fx.ub}')
+		# out += (f'{THEME.main_fg}{Mv.to(by + cy - 7, bx + cx)}{Fx.b}{BANNER_NOTE_0}{Fx.ub}')
+		# out += (f'{THEME.main_fg}{Mv.to(by + cy - 7, bx + cx)}{Fx.b}{BANNER_NOTE_1}{Fx.ub}')
+		# out += (f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b}{BANNER_ZIKI_0}{Fx.ub}')
+		# out += (f'{THEME.main_fg}{Mv.to(by + cy - 7, bx + cx)}{Fx.b}{BANNER_NOTE_2}{Fx.ub}')
+		# out += (f'{THEME.main_fg}{Mv.to(by + cy - 7, bx + cx)}{Fx.b}{BANNER_NOTE_3}{Fx.ub}')
 		#out += (f'{THEME.main_fg}{Mv.to(by + cy, bx + cx)}{Fx.b}{"CPU "}{Fx.ub}{Meters.cpu(cpu.cpu_usage[0][-1])}'
 		#		f'{THEME.gradient["cpu"][cpu.cpu_usage[0][-1]]}{cpu.cpu_usage[0][-1]:>4}{THEME.main_fg}%')
 		if cpu.got_sensors:
