@@ -1784,9 +1784,10 @@ class Box:
 		if not "+" in Key.mouse:
 			Key.mouse["+"] = [[xpos + 7 + i, CpuBox.y] for i in range(3)]
 			Key.mouse["-"] = [[CpuBox.x + CpuBox.width - 4 + i, CpuBox.y] for i in range(3)]
-		Draw.buffer("update_ms!" if now and not Menu.active else "update_ms",
-			f'{Mv.to(CpuBox.y, xpos)}{THEME.cpu_box(Symbol.h_line * 7, Symbol.title_left)}{Fx.b}{THEME.hi_fg("+")} ',
-			f'{THEME.title(update_string)} {THEME.hi_fg("-")}{Fx.ub}{THEME.cpu_box(Symbol.title_right)}', only_save=Menu.active, once=True)
+		# ziki: hide ui refresh hud settings
+		# Draw.buffer("update_ms!" if now and not Menu.active else "update_ms",
+			# f'{Mv.to(CpuBox.y, xpos)}{THEME.cpu_box(Symbol.h_line * 7, Symbol.title_left)}{Fx.b}{THEME.hi_fg("+")} ',
+			# f'{THEME.title(update_string)} {THEME.hi_fg("-")}{Fx.ub}{THEME.cpu_box(Symbol.title_right)}', only_save=Menu.active, once=True)
 		if now and not Menu.active:
 			Draw.clear("update_ms")
 			if CONFIG.show_battery and hasattr(psutil, "sensors_battery") and psutil.sensors_battery():
