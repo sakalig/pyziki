@@ -4407,17 +4407,11 @@ class Menu:
 			cls.background = f'{THEME.inactive_fg}' + Fx.uncolor(f'{Draw.saved_buffer()}') + f'{Term.fg}'
 		help_items: Dict[str, str] = {
 			"(Mouse 1)" : "Clicks buttons and selects in process list.",
-			"Selected (Mouse 1)" : "Show detailed information for selected process.",
 			"(Mouse scroll)" : "Scrolls any scrollable list/text under cursor.",
 			"(Esc, shift+m)" : "Toggles main menu.",
-			"(m)" : "Cycle view presets, order: full->proc->stat->user.",
-			"(1)" : "Toggle CPU box.",
-			"(2)" : "Toggle MEM box.",
-			"(3)" : "Toggle NET box.",
-			"(4)" : "Toggle PROC box.",
-			"(d)" : "Toggle disks view in MEM box.",
 			"(F2, o)" : "Shows options.",
 			"(F1, shift+h)" : "Shows this window.",
+			# ziki: prevent sleep functionality
 			"(ctrl+z)" : "Sleep program and put in background.",
 			"(ctrl+c, q)" : "Quits program.",
 			"(+) / (-)" : "Add/Subtract 100ms to/from update timer.",
