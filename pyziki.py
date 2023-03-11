@@ -4391,7 +4391,7 @@ class Menu:
 		cls.close = False
 
 	@classmethod
-	def help(cls):
+	def help(cls): nj
 		if Term.width < 80 or Term.height < 24:
 			errlog.warning(f'The menu system only works on a terminal size of 80x24 or above!')
 			return
@@ -4411,18 +4411,16 @@ class Menu:
 			"(Esc, shift+m)" : "Toggles main menu.",
 			"(F2, o)" : "Shows options.",
 			"(F1, shift+h)" : "Shows this window.",
-			# ziki: prevent sleep functionality
+			# ziki: prevent / work-around sleep functionality
 			"(ctrl+z)" : "Sleep program and put in background.",
 			"(ctrl+c, q)" : "Quits program.",
 			"(+) / (-)" : "Add/Subtract 100ms to/from update timer.",
-			"(Up, k) (Down, j)" : "Select in process list.",
-			"(Enter)" : "Show detailed information for selected process.",
-			"(Spacebar)" : "Expand/collapse the selected process in tree view.",
-			"(Pg Up) (Pg Down)" : "Jump 1 page in process list.",
-			"(Home) (End)" : "Jump to first or last page in process list.",
-			"(Left, h) (Right, l)" : "Select previous/next sorting column.",
-			"(b) (n)" : "Select previous/next network device.",
-			"(s)" : "Toggle showing swap as a disk.",
+			"(Up, k) (Down, j)" : "Select in songs list.",
+			"(Enter)" : "Playback a selected audio file.",
+			"(Pg Up) (Pg Down)" : "Jump 1 page in songs list.",
+			"(Home) (End)" : "Jump to first or last page in songs list.",
+			# ziki: to be re-introduced with directory exploration functionality
+			#"(Left, h) (Right, l)" : "Select previous/next sorting column.",
 			"(i)" : "Toggle disks io mode with big graphs.",
 			"(z)" : "Toggle totals reset for current network device",
 			"(a)" : "Toggle auto scaling for the network graphs.",
