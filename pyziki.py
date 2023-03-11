@@ -4391,7 +4391,7 @@ class Menu:
 		cls.close = False
 
 	@classmethod
-	def help(cls): nj
+	def help(cls):
 		if Term.width < 80 or Term.height < 24:
 			errlog.warning(f'The menu system only works on a terminal size of 80x24 or above!')
 			return
