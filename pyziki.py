@@ -4427,8 +4427,7 @@ class Menu:
 			"(y)" : "Toggle synced scaling mode for network graphs.",
 			"(f, /)" : "Input a NON case-sensitive process filter.",
 			"(shift+f)" : "Input a case-sensitive process filter.",
-			"(c)" : "Toggle per-core cpu usage of processes.",
-			"(r)" : "Reverse sorting order in processes box.",
+			# ziki: pressing `e` crashes the script
 			"(e)" : "Toggle processes tree view.",
 			"(delete)" : "Clear any entered filter.",
 			"Selected (shift+t)" : "Terminate selected process with SIGTERM - 15.",
