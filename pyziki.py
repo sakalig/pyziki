@@ -4434,8 +4434,7 @@ class Menu:
 			"Selected (shift+k)" : "Kill selected process with SIGKILL - 9.",
 			"Selected (shift+i)" : "Interrupt selected process with SIGINT - 2.",
 			"_1" : " ",
-			"_2" : "For bug reporting and project updates, visit:",
-			"_3" : "https://github.com/aristocratos/bpytop",
+			"_2" : "https://github.com/sakalig/pyziki",
 		}
 
 		while not cls.close:
