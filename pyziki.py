@@ -4430,9 +4430,6 @@ class Menu:
 			# ziki: pressing `e` crashes the script
 			"(e)" : "Toggle processes tree view.",
 			"(delete)" : "Clear any entered filter.",
-			"Selected (shift+t)" : "Terminate selected process with SIGTERM - 15.",
-			"Selected (shift+k)" : "Kill selected process with SIGKILL - 9.",
-			"Selected (shift+i)" : "Interrupt selected process with SIGINT - 2.",
 			"_1" : " ",
 			"_2" : "https://github.com/sakalig/pyziki",
 		}
