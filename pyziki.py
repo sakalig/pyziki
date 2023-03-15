@@ -4840,62 +4840,7 @@ class Menu:
 					'Will otherwise automatically choose the NIC',
 					'with the highest total download since boot.'],
 			},
-			"proc" : {
-				"proc_update_mult" : [
-					'Processes update multiplier.',
-					'Sets how often the process list is updated as',
-					'a multiplier of "update_ms".',
-					'',
-					'Set to 2 or higher to greatly decrease bpytop',
-					'cpu usage. (Only integers)'],
-				"proc_sorting" : [
-					'Processes sorting option.',
-					'',
-					'Possible values: "pid", "program", "arguments",',
-					'"threads", "user", "memory", "cpu lazy" and',
-					'"cpu responsive".',
-					'',
-					'"cpu lazy" updates top process over time,',
-					'"cpu responsive" updates top process directly.'],
-				"proc_reversed" : [
-					'Reverse processes sorting order.',
-					'',
-					'True or False.'],
-				"proc_tree" : [
-					'Processes tree view.',
-					'',
-					'Set true to show processes grouped by parents,',
-					'with lines drawn between parent and child',
-					'process.'],
-				"tree_depth" : [
-					'Process tree auto collapse depth.',
-					'',
-					'Sets the depth where the tree view will auto',
-					'collapse processes at.'],
-				"proc_colors" : [
-					'Enable colors in process view.',
-					'',
-					'Uses the cpu graph gradient colors.'],
-				"proc_gradient" : [
-					'Enable process view gradient fade.',
-					'',
-					'Fades from top or current selection.',
-					'Max fade value is equal to current themes',
-					'"inactive_fg" color value.'],
-				"proc_per_core" : [
-					'Process usage per core.',
-					'',
-					'If process cpu usage should be of the core',
-					'it\'s running on or usage of the total',
-					'available cpu power.',
-					'',
-					'If true and process is multithreaded',
-					'cpu usage can reach over 100%.'],
-				"proc_mem_bytes" : [
-					'Show memory as bytes in process list.',
-					' ',
-					'True or False.'],
-			}
+			
 		}
 
 		loglevel_i: int = CONFIG.log_levels.index(CONFIG.log_level)
