@@ -4786,61 +4786,6 @@ class Menu:
 					'',
 					'Example: disks_filter="exclude=/boot, /home/user"'],
 			},
-			"net" : {
-				"net_download" : [
-					'Fixed network graph download value.',
-					'',
-					'Default "10M" = 10 MibiBytes.',
-					'Possible units:',
-					'"K" (KiB), "M" (MiB), "G" (GiB).',
-					'',
-					'Append "bit" for bits instead of bytes,',
-					'i.e "100Mbit"',
-					'',
-					'Can be toggled with auto button.'],
-				"net_upload" : [
-					'Fixed network graph upload value.',
-					'',
-					'Default "10M" = 10 MibiBytes.',
-					'Possible units:',
-					'"K" (KiB), "M" (MiB), "G" (GiB).',
-					'',
-					'Append "bit" for bits instead of bytes,',
-					'i.e "100Mbit"',
-					'',
-					'Can be toggled with auto button.'],
-				"net_auto" : [
-					'Start in network graphs auto rescaling mode.',
-					'',
-					'Ignores any values set above at start and',
-					'rescales down to 10KibiBytes at the lowest.',
-					'',
-					'True or False.'],
-				"net_sync" : [
-					'Network scale sync.',
-					'',
-					'Syncs the scaling for download and upload to',
-					'whichever currently has the highest scale.',
-					'',
-					'True or False.'],
-				"net_color_fixed" : [
-					'Set network graphs color gradient to fixed.',
-					'',
-					'If True the network graphs color is based',
-					'on the total bandwidth usage instead of',
-					'the current autoscaling.',
-					'',
-					'The bandwidth usage is based on the',
-					'"net_download" and "net_upload" values set',
-					'above.'],
-				"net_iface" : [
-					'Network Interface.',
-					'',
-					'Manually set the starting Network Interface.',
-					'Will otherwise automatically choose the NIC',
-					'with the highest total download since boot.'],
-			},
-			
 		}
 
 		loglevel_i: int = CONFIG.log_levels.index(CONFIG.log_level)
