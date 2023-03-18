@@ -4703,13 +4703,6 @@ class Menu:
 					'Custom cpu model name in cpu percentage box.',
 					'',
 					'Empty string to disable.'],
-				"show_uptime" : [
-					'Shows the system uptime in the CPU box.',
-					'',
-					'Can also be shown in the clock by using',
-					'"/uptime" in the formatting.',
-					'',
-					'True or False.'],
 			},
 		}
 
