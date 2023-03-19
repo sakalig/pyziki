@@ -4699,10 +4699,6 @@ class Menu:
 					'',
 					'Can cause slowdowns on systems with many',
 					'cores and psutil versions below 5.8.1'],
-				"custom_cpu_name" : [
-					'Custom cpu model name in cpu percentage box.',
-					'',
-					'Empty string to disable.'],
 			},
 		}
 
