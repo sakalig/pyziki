@@ -4694,11 +4694,6 @@ class Menu:
 					'',
 					'Rankine, 0 = absolute zero, 1 degree change',
 					'equals 1 degree change in Fahrenheit.'],
-				"show_cpu_freq" : [
-					'Show CPU frequency',
-					'',
-					'Can cause slowdowns on systems with many',
-					'cores and psutil versions below 5.8.1'],
 			},
 		}
 
