@@ -4682,18 +4682,6 @@ class Menu:
 					'',
 					'Only works if check_temp is True and',
 					'the system is reporting core temps.'],
-				"temp_scale" : [
-					'Which temperature scale to use.',
-					'',
-					'Celsius, default scale.',
-					'',
-					'Fahrenheit, the american one.',
-					'',
-					'Kelvin, 0 = absolute zero, 1 degree change',
-					'equals 1 degree change in Celsius.',
-					'',
-					'Rankine, 0 = absolute zero, 1 degree change',
-					'equals 1 degree change in Fahrenheit.'],
 			},
 		}
 
