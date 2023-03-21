@@ -4671,12 +4671,6 @@ class Menu:
 					'Enable cpu temperature reporting.',
 					'',
 					'True or False.'],
-				"cpu_sensor" : [
-					'Cpu temperature sensor',
-					'',
-					'Select the sensor that corresponds to',
-					'your cpu temperature.',
-					'Set to "Auto" for auto detection.'],
 			},
 		}
 
