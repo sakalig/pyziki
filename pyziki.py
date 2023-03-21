@@ -4677,11 +4677,6 @@ class Menu:
 					'Select the sensor that corresponds to',
 					'your cpu temperature.',
 					'Set to "Auto" for auto detection.'],
-				"show_coretemp" : [
-					'Show temperatures for cpu cores.',
-					'',
-					'Only works if check_temp is True and',
-					'the system is reporting core temps.'],
 			},
 		}
 
