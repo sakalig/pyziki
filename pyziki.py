@@ -4667,10 +4667,6 @@ class Menu:
 						'to fit to box height.',
 						'',
 						'True or False.'],
-				"check_temp" : [
-					'Enable cpu temperature reporting.',
-					'',
-					'True or False.'],
 			},
 		}
 
