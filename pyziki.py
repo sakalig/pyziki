@@ -4660,13 +4660,6 @@ class Menu:
 						'Toggles orientation of the lower CPU graph.',
 						'',
 						'True or False.'],
-				"cpu_single_graph" : [
-						'Completely disable the lower CPU graph.',
-						'',
-						'Shows only upper CPU graph and resizes it',
-						'to fit to box height.',
-						'',
-						'True or False.'],
 			},
 		}
 
