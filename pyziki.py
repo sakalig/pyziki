@@ -4656,10 +4656,6 @@ class Menu:
 					'https://psutil.readthedocs.io/en/latest/',
 					'#psutil.cpu_times',
 					'for attributes available on specific platforms.'],
-				"cpu_invert_lower" : [
-						'Toggles orientation of the lower CPU graph.',
-						'',
-						'True or False.'],
 			},
 		}
 
