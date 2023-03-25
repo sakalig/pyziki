@@ -4645,17 +4645,6 @@ class Menu:
 					'https://psutil.readthedocs.io/en/latest/',
 					'#psutil.cpu_times',
 					'for attributes available on specific platforms.'],
-				"cpu_graph_lower" : [
-					'Sets the CPU stat shown in lower half of',
-					'the CPU graph.',
-					'',
-					'"total" = Total cpu usage.',
-					'"user" = User mode cpu usage.',
-					'"system" = Kernel mode cpu usage.',
-					'See:',
-					'https://psutil.readthedocs.io/en/latest/',
-					'#psutil.cpu_times',
-					'for attributes available on specific platforms.'],
 			},
 		}
 
