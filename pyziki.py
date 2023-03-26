@@ -4633,19 +4633,6 @@ class Menu:
 					'The level set includes all lower levels,',
 					'i.e. "DEBUG" will show all logging info.']
 			},
-			"cpu" : {
-				"cpu_graph_upper" : [
-					'Sets the CPU stat shown in upper half of',
-					'the CPU graph.',
-					'',
-					'"total" = Total cpu usage.',
-					'"user" = User mode cpu usage.',
-					'"system" = Kernel mode cpu usage.',
-					'See:',
-					'https://psutil.readthedocs.io/en/latest/',
-					'#psutil.cpu_times',
-					'for attributes available on specific platforms.'],
-			},
 		}
 
 		loglevel_i: int = CONFIG.log_levels.index(CONFIG.log_level)
