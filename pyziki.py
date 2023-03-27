@@ -4626,12 +4626,6 @@ class Menu:
 					'',
 					'Checks for latest version from:',
 					'https://github.com/aristocratos/bpytop'],
-				"log_level" : [
-					'Set loglevel for error.log',
-					'',
-					'Levels are: "ERROR" "WARNING" "INFO" "DEBUG".',
-					'The level set includes all lower levels,',
-					'i.e. "DEBUG" will show all logging info.']
 			},
 		}
 
