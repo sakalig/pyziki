@@ -4621,11 +4621,6 @@ class Menu:
 					'',
 					'The init screen is purely cosmetical and',
 					'slows down start to show status messages.'],
-				"update_check" : [
-					'Check for updates at start.',
-					'',
-					'Checks for latest version from:',
-					'https://github.com/aristocratos/bpytop'],
 			},
 		}
 
