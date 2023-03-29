@@ -4616,11 +4616,6 @@ class Menu:
 					'',
 					'Show battery stats in the top right corner',
 					'if a battery is present.'],
-				"show_init" : [
-					'Show init screen at startup.',
-					'',
-					'The init screen is purely cosmetical and',
-					'slows down start to show status messages.'],
 			},
 		}
 
