@@ -4610,12 +4610,11 @@ class Menu:
 					'',
 					'Set this to false if the menus is flickering',
 					'too much for a comfortable experience.'],
-				"show_battery" : [
-					'Show battery stats.',
+				"show_volume" : [
+					'Show volume bar.',
 					'(Only visible if cpu box is enabled!)',
 					'',
-					'Show battery stats in the top right corner',
-					'if a battery is present.'],
+					'Show volume bar in the top right corner',],
 			},
 		}
 
