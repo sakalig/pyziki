@@ -4610,11 +4610,11 @@ class Menu:
 					'',
 					'Set this to false if the menus is flickering',
 					'too much for a comfortable experience.'],
-				"show_volume" : [
-					'Show volume bar.',
-					'(Only visible if cpu box is enabled!)',
-					'',
-					'Show volume bar in the top right corner',],
+				# "show_volume" : [
+				# 	'Show volume bar.',
+				# 	'(Only visible if cpu box is enabled!)',
+				# 	'',
+				# 	'Show volume bar in the top right corner',],
 			},
 		}
 
