@@ -4603,13 +4603,13 @@ class Menu:
 					'"%H" = 24h hour, "%I" = 12h hour',
 					'"%M" = minute, "%S" = second',
 					'"%d" = day, "%m" = month, "%y" = year'],
-				"background_update" : [
-					'Update main ui when menus are showing.',
-					'',
-					'True or False.',
-					'',
-					'Set this to false if the menus is flickering',
-					'too much for a comfortable experience.'],
+				# "background_update" : [
+				# 	'Update main ui when menus are showing.',
+				# 	'',
+				# 	'True or False.',
+				# 	'',
+				# 	'Set this to false if the menus is flickering',
+				# 	'too much for a comfortable experience.'],
 				# "show_volume" : [
 				# 	'Show volume bar.',
 				# 	'(Only visible if cpu box is enabled!)',
